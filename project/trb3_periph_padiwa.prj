@@ -59,6 +59,13 @@ add_file -vhdl -lib work "../../trbnet/trb_net_components.vhd"
 add_file -vhdl -lib work "../base/trb3_components.vhd"
 add_file -vhdl -lib work "../base/tdc_components.vhd"
 
+#soda files
+add_file -vhdl -lib work "../hdl/soda/lattice/trb_net16_ned_sync3_ecp3_sfp.vhd"
+add_file -vhdl -lib work "../hdl/soda/lattice/ecp3/sfp_3sync_200_int.vhd"
+add_file -vhdl -lib work "../hdl/soda/source/soda_packet_handler.vhd"
+add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/lattice/ecp3/DLLl_in200M_out200M.vhd"
+add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/lattice/sync_bit.vhd"
+
 add_file -vhdl -lib work "../../trbnet/trb_net16_term_buf.vhd"
 add_file -vhdl -lib work "../../trbnet/trb_net_CRC.vhd"
 add_file -vhdl -lib work "../../trbnet/trb_net_CRC8.vhd"
