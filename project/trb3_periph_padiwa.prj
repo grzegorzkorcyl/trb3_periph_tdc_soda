@@ -56,8 +56,8 @@ add_file -vhdl -lib work "currentRelease/tdc_version.vhd"
 add_file -vhdl -lib work "config.vhd"
 add_file -vhdl -lib work "../../trbnet/trb_net_std.vhd"
 add_file -vhdl -lib work "../../trbnet/trb_net_components.vhd"
-add_file -vhdl -lib work "../base/trb3_components.vhd"
-add_file -vhdl -lib work "../base/tdc_components.vhd"
+add_file -vhdl -lib work "../../trb3/base/trb3_components.vhd"
+add_file -vhdl -lib work "../../trb3/base/tdc_components.vhd"
 
 #soda files
 add_file -vhdl -lib work "../hdl/soda/lattice/trb_net16_ned_sync3_ecp3_sfp.vhd"
@@ -148,7 +148,7 @@ add_file -vhdl -lib work "../../trbnet/media_interfaces/ecp3_sfp/sfp_1_200_int.v
 add_file -vhdl -lib work "../../trbnet/media_interfaces/trb_net16_lsm_sfp.vhd"
 add_file -vhdl -lib work "../../trbnet/media_interfaces/trb_net16_med_ecp3_sfp.vhd"
 
-add_file -vhdl -lib "work" "../base/cores/pll_in200_out100.vhd"
+add_file -vhdl -lib "work" "../../trb3/base/cores/pll_in200_out100.vhd"
 
 
 
