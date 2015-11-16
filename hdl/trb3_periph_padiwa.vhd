@@ -344,7 +344,8 @@ begin
 			CLK   => CLK_GPLL_RIGHT,
 			CLKOP => clk_100_internal,
 			CLKOK => clk_200_internal,
-			LOCK  => pll_lock
+			LOCK  => pll_lock,
+			RESET => '0'
 		);
 
 	-- internal oscillator with frequency of 2.5MHz for tdc calibration
