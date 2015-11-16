@@ -55,9 +55,14 @@ add_file -vhdl -lib work "version.vhd"
 add_file -vhdl -lib work "currentRelease/tdc_version.vhd"
 add_file -vhdl -lib work "config.vhd"
 add_file -vhdl -lib work "../../trbnet/trb_net_std.vhd"
+add_file -vhdl -lib work "currentRelease/tdc_components.vhd"
+
 add_file -vhdl -lib work "../../trbnet/trb_net_components.vhd"
 add_file -vhdl -lib work "../../trb3/base/trb3_components.vhd"
-add_file -vhdl -lib work "currentRelease/tdc_components.vhd"
+add_file -vhdl -lib work "../hdl/soda/source/soda_components.vhd"
+add_file -vhdl -lib work "../../trbnet/media_interfaces/sync/med_sync_define.vhd"
+add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/Panda_package.vhd"
+add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/DC_LUT_package.vhd"
 
 #soda files
 add_file -vhdl -lib work "../hdl/soda/lattice/trb_net16_med_sync3_ecp3_sfp.vhd"
