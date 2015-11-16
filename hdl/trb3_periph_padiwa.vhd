@@ -308,8 +308,8 @@ architecture trb3_periph_padiwa_arch of trb3_periph_padiwa is
 
 	signal superburst_update_S    : std_logic;
 	signal superburst_number_S    : std_logic_vector(30 downto 0);
-	signal DLM_from_uplink_S      : std_logic_vector(3 downto 0);
-	signal DLM_WORD_from_uplink_S : std_logic_vector(4 * 8 - 1 downto 0);
+	signal DLM_from_uplink_S      : std_logic;
+	signal DLM_WORD_from_uplink_S : std_logic_vector(1 * 8 - 1 downto 0);
 
 begin
 	---------------------------------------------------------------------------
