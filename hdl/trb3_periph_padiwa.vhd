@@ -91,6 +91,10 @@ entity trb3_periph_padiwa is
 end entity;
 
 architecture trb3_periph_padiwa_arch of trb3_periph_padiwa is
+	COMPONENT OSCF
+		PORT(OSC : OUT std_logic);
+	END COMPONENT;
+
 	--Constants
 	constant REGIO_NUM_STAT_REGS : integer := 0;
 	constant REGIO_NUM_CTRL_REGS : integer := 2;
