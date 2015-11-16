@@ -417,7 +417,7 @@ begin
 	--			CTRL_DEBUG         => (others => '0')
 	--		);
 
-	THE_MEDIA_UPLINK : trb_net16_med_sync3_ecp3_sfp
+	THE_MEDIA_UPLINK : entity work.trb_net16_med_sync3_ecp3_sfp
 		port map(
 			CLK                => clk_200_i,
 			SYSCLK             => clk_100_i,
