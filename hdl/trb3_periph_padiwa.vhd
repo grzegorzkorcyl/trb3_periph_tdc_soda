@@ -477,7 +477,7 @@ begin
 			data_out => reset_SODAclock_S
 		);
 
-	soda_packet_handler1 : soda_packet_handler
+	soda_packet_handler1 : entity work.soda_packet_handler
 		port map(
 			SODACLK                  => SODA_clock_rx_S,
 			RESET                    => reset_SODAclock_S,
