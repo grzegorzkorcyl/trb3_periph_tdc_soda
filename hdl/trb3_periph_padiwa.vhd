@@ -562,7 +562,7 @@ begin
 			FEE_DATA_IN                        => (others => '0'),
 			FEE_DATA_WRITE_IN(0)               => '0',
 			FEE_DATA_FINISHED_IN(0)            => '0',
-			FEE_DATA_ALMOST_FULL_OUT(0)        => '0',
+			FEE_DATA_ALMOST_FULL_OUT(0)        => open,
 
 			-- Slow Control Data Port
 			REGIO_COMMON_STAT_REG_IN           => common_stat_reg, --0x00
