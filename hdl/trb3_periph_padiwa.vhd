@@ -771,7 +771,7 @@ begin
 	---------------------------------------------------------------------------
 	-- SPI / Flash
 	---------------------------------------------------------------------------
-	THE_SPI_RELOAD : entity spi_flash_and_fpga_reload
+	THE_SPI_RELOAD : entity work.spi_flash_and_fpga_reload
 		port map(
 			CLK_IN               => clk_100_i,
 			RESET_IN             => reset_i,
@@ -823,58 +823,59 @@ begin
 	---------------------------------------------------------------------------
 	-- Trigger logic
 	---------------------------------------------------------------------------
-	gen_TRIGGER_LOGIC : if INCLUDE_TRIGGER_LOGIC = 1 generate
-		THE_TRIG_LOGIC : input_to_trigger_logic
-			generic map(
-				INPUTS  => PHYSICAL_INPUTS,
-				OUTPUTS => 4
-			)
-			port map(
-				CLK      => clk_100_i,
-				INPUT    => input_i(PHYSICAL_INPUTS downto 1),
-				OUTPUT   => trig_out,
-				DATA_IN  => trig_din,
-				DATA_OUT => trig_dout,
-				WRITE_IN => trig_write,
-				READ_IN  => trig_read,
-				ACK_OUT  => trig_ack,
-				NACK_OUT => trig_nack,
-				ADDR_IN  => trig_addr
-			);
-		FPGA5_COMM(10 downto 7) <= trig_out;
-	end generate;
+--	gen_TRIGGER_LOGIC : if INCLUDE_TRIGGER_LOGIC = 1 generate
+--		THE_TRIG_LOGIC : input_to_trigger_logic
+--			generic map(
+--				INPUTS  => PHYSICAL_INPUTS,
+--				OUTPUTS => 4
+--			)
+--			port map(
+--				CLK      => clk_100_i,
+--				INPUT    => input_i(PHYSICAL_INPUTS downto 1),
+--				OUTPUT   => trig_out,
+--				DATA_IN  => trig_din,
+--				DATA_OUT => trig_dout,
+--				WRITE_IN => trig_write,
+--				READ_IN  => trig_read,
+--				ACK_OUT  => trig_ack,
+--				NACK_OUT => trig_nack,
+--				ADDR_IN  => trig_addr
+--			);
+--		FPGA5_COMM(10 downto 7) <= trig_out;
+--	end generate;
 
 	---------------------------------------------------------------------------
 	-- Input Statistics
 	---------------------------------------------------------------------------
-	gen_STATISTICS : if INCLUDE_STATISTICS = 1 generate
-		THE_STAT_LOGIC : entity input_statistics
-			generic map(
-				INPUTS => PHYSICAL_INPUTS
-			)
-			port map(
-				CLK      => clk_100_i,
-				INPUT    => input_i(PHYSICAL_INPUTS downto 1),
-				DATA_IN  => stat_din,
-				DATA_OUT => stat_dout,
-				WRITE_IN => stat_write,
-				READ_IN  => stat_read,
-				ACK_OUT  => stat_ack,
-				NACK_OUT => stat_nack,
-				ADDR_IN  => stat_addr
-			);
-	end generate;
+	--	gen_STATISTICS : if INCLUDE_STATISTICS = 1 generate
+	--		THE_STAT_LOGIC : entity input_statistics
+	--			generic map(
+	--				INPUTS => PHYSICAL_INPUTS
+	--			)
+	--			port map(
+	--				CLK      => clk_100_i,
+	--				INPUT    => input_i(PHYSICAL_INPUTS downto 1),
+	--				DATA_IN  => stat_din,
+	--				DATA_OUT => stat_dout,
+	--				WRITE_IN => stat_write,
+	--				READ_IN  => stat_read,
+	--				ACK_OUT  => stat_ack,
+	--				NACK_OUT => stat_nack,
+	--				ADDR_IN  => stat_addr
+	--			);
+	--	end generate;
 
 	---------------------------------------------------------------------------
 	-- SED Detection
 	---------------------------------------------------------------------------
-	THE_SED : entity sedcheck
-		port map(
-			CLK       => clk_100_i,
-			ERROR_OUT => sed_error,
-			BUS_RX    => bussed_rx,
-			BUS_TX    => bussed_tx
-		);
+	--	THE_SED : entity sedcheck
+	--		port map(
+	--			CLK       => clk_100_i,
+	--			ERROR_OUT => sed_error,
+	--			BUS_RX    => bussed_rx,
+	--			BUS_TX    => bussed_tx
+	--		);
+	sed_error <= '0';
 
 	---------------------------------------------------------------------------
 	-- LED
