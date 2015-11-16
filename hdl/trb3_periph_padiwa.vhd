@@ -882,7 +882,7 @@ begin
 	-- LED
 	---------------------------------------------------------------------------
 	LED_ORANGE <= not reset_i when rising_edge(clk_100_i);
-	LED_YELLOW <= '1';
+	LED_YELLOW <= superburst_update_S;
 	LED_GREEN  <= not med_stat_op(9);
 	LED_RED    <= not (med_stat_op(10) or med_stat_op(11));
 
