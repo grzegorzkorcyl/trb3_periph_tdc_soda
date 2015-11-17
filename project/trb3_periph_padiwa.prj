@@ -177,7 +177,7 @@ add_file -vhdl -lib "work" "../../trb3/base/cores/pll_in200_out100.vhd"
 
 
 
-#add_file -vhdl -lib work "currentRelease/Adder_304.vhd"
+add_file -vhdl -lib work "currentRelease/Adder_304.vhd"
 add_file -vhdl -lib work "currentRelease/tdc_components.vhd"
 add_file -vhdl -lib work "currentRelease/bit_sync.vhd"
 #add_file -vhdl -lib work "currentRelease/BusHandler.vhd"
@@ -190,7 +190,7 @@ add_file -vhdl -lib work "currentRelease/Encoder_288_Bit.vhd"
 add_file -vhdl -lib work "currentRelease/fallingEdgeDetect.vhd"
 add_file -vhdl -lib work "currentRelease/hit_mux.vhd"
 add_file -vhdl -lib work "currentRelease/LogicAnalyser.vhd"
-#add_file -vhdl -lib work "currentRelease/Readout.vhd"
+add_file -vhdl -lib work "currentRelease/Readout.vhd"
 add_file -vhdl -lib work "currentRelease/Readout_record.vhd"
 add_file -vhdl -lib work "currentRelease/risingEdgeDetect.vhd"
 add_file -vhdl -lib work "currentRelease/ROM_encoder_ecp3.vhd"
