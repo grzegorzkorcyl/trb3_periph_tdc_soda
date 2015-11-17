@@ -423,6 +423,7 @@ begin
 	--			STAT_DEBUG         => med_stat_debug,
 	--			CTRL_DEBUG         => (others => '0')
 	--		);
+	
 
 	THE_MEDIA_UPLINK : entity work.trb_net16_med_sync3_ecp3_sfp
 		port map(
