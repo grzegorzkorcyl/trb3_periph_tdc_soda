@@ -99,7 +99,6 @@ attribute nopad of
 		lsm_status_ch1_s : OUT std_logic;
 		rx_cdr_lol_ch1_s : OUT std_logic;
 		sci_rddata : OUT std_logic_vector(7 downto 0);
-		sci_int : OUT std_logic;
 		tx_pll_lol_qd_s : OUT std_logic;
 		refclk2fpga : OUT std_logic
 		);
@@ -143,7 +142,6 @@ attribute nopad of
 		sci_sel_quad => sci_sel_quad,
 		sci_rd => sci_rd,
 		sci_wrn => sci_wrn,
-		sci_int => sci_int,
 		fpga_txrefclk => fpga_txrefclk,
 		tx_serdes_rst_c => tx_serdes_rst_c,
 		tx_pll_lol_qd_s => tx_pll_lol_qd_s,

@@ -1959,7 +1959,6 @@ entity sfp_2sync_200_int is
     sci_sel_quad    :   in std_logic;
     sci_rd    :   in std_logic;
     sci_wrn    :   in std_logic;
-    sci_int    :   out std_logic;
     fpga_txrefclk  :   in std_logic;
     tx_serdes_rst_c    :   in std_logic;
     tx_pll_lol_qd_s   :   out std_logic;
@@ -3054,7 +3053,7 @@ port map  (
   SCIRD => sci_rd,
   SCIWSTN => sci_wrn,
   CYAWSTN => fpsc_vlo,
-  SCIINT => sci_int,
+  SCIINT => open,
   FFC_CK_CORE_TX => fpga_txrefclk,
   FFC_MACRO_RST => serdes_rst_qd_c,
   FFC_QUAD_RST => rst_qd_c,

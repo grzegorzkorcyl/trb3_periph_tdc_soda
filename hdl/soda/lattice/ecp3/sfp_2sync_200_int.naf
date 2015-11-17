@@ -66,7 +66,6 @@ sci_rddata[0]  o
 sci_sel_quad  i
 sci_rd  i
 sci_wrn  i
-sci_int  o
 fpga_txrefclk  i
 tx_serdes_rst_c  i
 tx_pll_lol_qd_s  o

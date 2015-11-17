@@ -52,7 +52,7 @@ CCLMARK                 "7"
 CH1_SSLB                "DISABLED"
 CH1_SPLBPORTS           "DISABLED"
 CH1_PCSLBPORTS          "DISABLED"
-INT_ALL                 "ENABLED"
+INT_ALL                 "DISABLED"
 QD_REFCK2CORE           "ENABLED"
 
 
