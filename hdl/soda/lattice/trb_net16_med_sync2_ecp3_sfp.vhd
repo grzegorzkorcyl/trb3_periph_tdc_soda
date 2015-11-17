@@ -524,10 +524,11 @@ THE_SERDES: sfp_2sync_200_int
 		fpga_txrefclk => CLK,
 		tx_serdes_rst_c => CLEAR,
 		tx_pll_lol_qd_s => trb_tx_pll_lol_qd_i,  
-		rst_qd_c => '0',
+		refclk2fpga => open,
+		rst_n <= '1',
 		serdes_rst_qd_c => ffc_quad_rst
 	);
-
+	
 -------------------------------------------------------------------------
 -- RX Fifo & Data output
 -------------------------------------------------------------------------
