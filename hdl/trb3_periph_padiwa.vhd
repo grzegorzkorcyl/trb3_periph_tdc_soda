@@ -259,7 +259,7 @@ architecture trb3_periph_padiwa_arch of trb3_periph_padiwa is
 	signal tdc_ctrl_addr      : std_logic_vector(2 downto 0);
 	signal tdc_ctrl_data_in   : std_logic_vector(31 downto 0);
 	signal tdc_ctrl_data_out  : std_logic_vector(31 downto 0);
-	signal tdc_ctrl_reg       : std_logic_vector(6 * 32 - 1 downto 0);
+	signal tdc_ctrl_reg       : std_logic_vector(8 * 32 - 1 downto 0);
 
 	signal spi_bram_addr : std_logic_vector(7 downto 0);
 	signal spi_bram_wr_d : std_logic_vector(7 downto 0);
