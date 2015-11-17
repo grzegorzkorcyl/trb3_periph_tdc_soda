@@ -110,7 +110,8 @@ component sfp_2sync_200_int is
     fpga_txrefclk  :   in std_logic;
     tx_serdes_rst_c    :   in std_logic;
     tx_pll_lol_qd_s   :   out std_logic;
-    rst_qd_c    :   in std_logic;
+    refclk2fpga   :   out std_logic;
+    rst_n      :   in std_logic;
     serdes_rst_qd_c    :   in std_logic);
 
 end component;
@@ -525,7 +526,7 @@ THE_SERDES: sfp_2sync_200_int
 		tx_serdes_rst_c => CLEAR,
 		tx_pll_lol_qd_s => trb_tx_pll_lol_qd_i,  
 		refclk2fpga => open,
-		rst_n <= '1',
+		rst_n => '1',
 		serdes_rst_qd_c => ffc_quad_rst
 	);
 	
