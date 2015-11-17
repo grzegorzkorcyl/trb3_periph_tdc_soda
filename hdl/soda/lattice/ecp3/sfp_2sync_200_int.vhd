@@ -1925,6 +1925,7 @@ entity sfp_2sync_200_int is
 -- CH1 --
     hdinp_ch1, hdinn_ch1    :   in std_logic;
     hdoutp_ch1, hdoutn_ch1   :   out std_logic;
+    sci_sel_ch1    :   in std_logic;
     rxiclk_ch1    :   in std_logic;
     txiclk_ch1    :   in std_logic;
     rx_full_clk_ch1   :   out std_logic;
@@ -1952,6 +1953,13 @@ entity sfp_2sync_200_int is
 -- CH2 --
 -- CH3 --
 ---- Miscillaneous ports
+    sci_wrdata    :   in std_logic_vector (7 downto 0);
+    sci_addr    :   in std_logic_vector (5 downto 0);
+    sci_rddata   :   out std_logic_vector (7 downto 0);
+    sci_sel_quad    :   in std_logic;
+    sci_rd    :   in std_logic;
+    sci_wrn    :   in std_logic;
+    sci_int    :   out std_logic;
     fpga_txrefclk  :   in std_logic;
     tx_serdes_rst_c    :   in std_logic;
     tx_pll_lol_qd_s   :   out std_logic;
@@ -2712,8 +2720,8 @@ port map  (
   PCIE_POWERDOWN_1_1 => fpsc_vlo,
   PCIE_RXVALID_1 => open,
   PCIE_PHYSTATUS_1 => open,
-  SCISELCH1 => fpsc_vlo,
-  SCIENCH1 => fpsc_vlo,
+  SCISELCH1 => sci_sel_ch1,
+  SCIENCH1 => fpsc_vhi,
   FF_RXI_CLK_1 => rxiclk_ch1,
   FF_TXI_CLK_1 => txiclk_ch1,
   FF_EBRD_CLK_1 => fpsc_vlo,
@@ -3019,34 +3027,34 @@ port map  (
   FFC_RATE_MODE_RX_3 => fpsc_vlo,
 
 ----- Auxilliary ----
-  SCIWDATA7 => fpsc_vlo,
-  SCIWDATA6 => fpsc_vlo,
-  SCIWDATA5 => fpsc_vlo,
-  SCIWDATA4 => fpsc_vlo,
-  SCIWDATA3 => fpsc_vlo,
-  SCIWDATA2 => fpsc_vlo,
-  SCIWDATA1 => fpsc_vlo,
-  SCIWDATA0 => fpsc_vlo,
-  SCIADDR5 => fpsc_vlo,
-  SCIADDR4 => fpsc_vlo,
-  SCIADDR3 => fpsc_vlo,
-  SCIADDR2 => fpsc_vlo,
-  SCIADDR1 => fpsc_vlo,
-  SCIADDR0 => fpsc_vlo,
-  SCIRDATA7 => open,
-  SCIRDATA6 => open,
-  SCIRDATA5 => open,
-  SCIRDATA4 => open,
-  SCIRDATA3 => open,
-  SCIRDATA2 => open,
-  SCIRDATA1 => open,
-  SCIRDATA0 => open,
-  SCIENAUX => fpsc_vlo,
-  SCISELAUX => fpsc_vlo,
-  SCIRD => fpsc_vlo,
-  SCIWSTN => fpsc_vlo,
+  SCIWDATA7 => sci_wrdata(7),
+  SCIWDATA6 => sci_wrdata(6),
+  SCIWDATA5 => sci_wrdata(5),
+  SCIWDATA4 => sci_wrdata(4),
+  SCIWDATA3 => sci_wrdata(3),
+  SCIWDATA2 => sci_wrdata(2),
+  SCIWDATA1 => sci_wrdata(1),
+  SCIWDATA0 => sci_wrdata(0),
+  SCIADDR5 => sci_addr(5),
+  SCIADDR4 => sci_addr(4),
+  SCIADDR3 => sci_addr(3),
+  SCIADDR2 => sci_addr(2),
+  SCIADDR1 => sci_addr(1),
+  SCIADDR0 => sci_addr(0),
+  SCIRDATA7 => sci_rddata(7),
+  SCIRDATA6 => sci_rddata(6),
+  SCIRDATA5 => sci_rddata(5),
+  SCIRDATA4 => sci_rddata(4),
+  SCIRDATA3 => sci_rddata(3),
+  SCIRDATA2 => sci_rddata(2),
+  SCIRDATA1 => sci_rddata(1),
+  SCIRDATA0 => sci_rddata(0),
+  SCIENAUX => fpsc_vhi,
+  SCISELAUX => sci_sel_quad,
+  SCIRD => sci_rd,
+  SCIWSTN => sci_wrn,
   CYAWSTN => fpsc_vlo,
-  SCIINT => open,
+  SCIINT => sci_int,
   FFC_CK_CORE_TX => fpga_txrefclk,
   FFC_MACRO_RST => serdes_rst_qd_c,
   FFC_QUAD_RST => rst_qd_c,

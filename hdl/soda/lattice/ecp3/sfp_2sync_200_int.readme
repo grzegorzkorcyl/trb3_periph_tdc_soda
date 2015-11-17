@@ -62,6 +62,7 @@ attribute nopad of
 	PORT(
 		hdinp_ch1 : IN std_logic;
 		hdinn_ch1 : IN std_logic;
+		sci_sel_ch1 : IN std_logic;
 		rxiclk_ch1 : IN std_logic;
 		txiclk_ch1 : IN std_logic;
 		fpga_rxrefclk_ch1 : IN std_logic;
@@ -75,6 +76,11 @@ attribute nopad of
 		rx_pwrup_ch1_c : IN std_logic;
 		tx_div2_mode_ch1_c : IN std_logic;
 		rx_div2_mode_ch1_c : IN std_logic;
+		sci_wrdata : IN std_logic_vector(7 downto 0);
+		sci_addr : IN std_logic_vector(5 downto 0);
+		sci_sel_quad : IN std_logic;
+		sci_rd : IN std_logic;
+		sci_wrn : IN std_logic;
 		fpga_txrefclk : IN std_logic;
 		tx_serdes_rst_c : IN std_logic;
 		rst_n : IN std_logic;
@@ -92,6 +98,8 @@ attribute nopad of
 		rx_los_low_ch1_s : OUT std_logic;
 		lsm_status_ch1_s : OUT std_logic;
 		rx_cdr_lol_ch1_s : OUT std_logic;
+		sci_rddata : OUT std_logic_vector(7 downto 0);
+		sci_int : OUT std_logic;
 		tx_pll_lol_qd_s : OUT std_logic;
 		refclk2fpga : OUT std_logic
 		);
@@ -104,6 +112,7 @@ attribute nopad of
 		hdinn_ch1 => hdinn_ch1,
 		hdoutp_ch1 => hdoutp_ch1,
 		hdoutn_ch1 => hdoutn_ch1,
+		sci_sel_ch1 => sci_sel_ch1,
 		rxiclk_ch1 => rxiclk_ch1,
 		txiclk_ch1 => txiclk_ch1,
 		rx_full_clk_ch1 => rx_full_clk_ch1,
@@ -128,6 +137,13 @@ attribute nopad of
 		rx_cdr_lol_ch1_s => rx_cdr_lol_ch1_s,
 		tx_div2_mode_ch1_c => tx_div2_mode_ch1_c,
 		rx_div2_mode_ch1_c => rx_div2_mode_ch1_c,
+		sci_wrdata => sci_wrdata,
+		sci_addr => sci_addr,
+		sci_rddata => sci_rddata,
+		sci_sel_quad => sci_sel_quad,
+		sci_rd => sci_rd,
+		sci_wrn => sci_wrn,
+		sci_int => sci_int,
 		fpga_txrefclk => fpga_txrefclk,
 		tx_serdes_rst_c => tx_serdes_rst_c,
 		tx_pll_lol_qd_s => tx_pll_lol_qd_s,

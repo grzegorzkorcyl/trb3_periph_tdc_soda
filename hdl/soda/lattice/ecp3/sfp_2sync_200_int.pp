@@ -181,8 +181,8 @@
 #define _cchmark "9"
 #define _cclmark "7"
 #define _rst_gen "ENABLED"
-#define _sci_ports "DISABLED"
-#define _sci_int_port "DISABLED"
+#define _sci_ports "ENABLED"
+#define _sci_int_port "ENABLED"
 #define _refck2core "ENABLED"
 #define _circuit_name sfp_2sync_200_int
 #define _lang vhdl

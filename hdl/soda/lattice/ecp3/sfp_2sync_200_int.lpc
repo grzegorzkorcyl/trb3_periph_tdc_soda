@@ -17,7 +17,7 @@ ModuleName=sfp_2sync_200_int
 SourceFormat=VHDL
 ParameterFileVersion=1.0
 Date=11/17/2015
-Time=13:36:21
+Time=14:19:36
 
 [Parameters]
 Verilog=0
@@ -242,8 +242,8 @@ _rx_los_port0=Internal
 _rx_los_port1=Internal
 _rx_los_port2=Internal
 _rx_los_port3=Internal
-_sci_ports=DISABLED
-_sci_int_port=DISABLED
+_sci_ports=ENABLED
+_sci_int_port=ENABLED
 _refck2core=ENABLED
 Regen=auto
 PAR1=0
