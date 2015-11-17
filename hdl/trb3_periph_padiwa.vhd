@@ -944,7 +944,7 @@ begin
 			generic map(
 				CHANNEL_NUMBER => NUM_TDC_CHANNELS, -- Number of TDC channels
 				STATUS_REG_NR  => 21,       -- Number of status regs
-				CONTROL_REG_NR => 6,        -- Number of control regs - higher than 8 check tdc_ctrl_addr
+				CONTROL_REG_NR => 8,        -- Number of control regs - higher than 8 check tdc_ctrl_addr
 				--TDC_VERSION    => TDC_VERSION, -- TDC version number
 				DEBUG          => c_YES,
 				SIMULATION     => c_NO)
