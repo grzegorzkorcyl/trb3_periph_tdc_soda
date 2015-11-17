@@ -67,6 +67,8 @@ add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/DC_LUT_package.vhd"
 #soda files
 add_file -vhdl -lib work "../hdl/soda/lattice/trb_net16_med_sync3_ecp3_sfp.vhd"
 add_file -vhdl -lib work "../hdl/soda/lattice/ecp3/sfp_3sync_200_int.vhd"
+add_file -vhdl -lib work "../hdl/soda/lattice/trb_net16_med_sync2_ecp3_sfp.vhd"
+add_file -vhdl -lib work "../hdl/soda/lattice/ecp3/sfp_2sync_200_int.vhd"
 add_file -vhdl -lib work "../hdl/soda/source/soda_packet_handler.vhd"
 add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/lattice/ecp3/DLLl_in200M_out200M.vhd"
 add_file -vhdl -lib work "../hdl/soda/dc_sources/sources/lattice/sync_bit.vhd"
