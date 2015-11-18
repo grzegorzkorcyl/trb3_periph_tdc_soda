@@ -374,100 +374,100 @@ begin
 	---------------------------------------------------------------------------
 	-- The TrbNet media interface (to other FPGA)
 	---------------------------------------------------------------------------
-	--	THE_MEDIA_UPLINK : trb_net16_med_ecp3_sfp
-	--		generic map(
-	--			SERDES_NUM  => 1,           --number of serdes in quad
-	--			EXT_CLOCK   => c_NO,        --use internal clock
-	--			USE_200_MHZ => c_YES,       --run on 200 MHz clock
-	--			USE_CTC     => c_NO,
-	--			USE_SLAVE   => SYNC_MODE
-	--		)
-	--		port map(
-	--			CLK                => clk_200_i,
-	--			SYSCLK             => clk_100_i,
-	--			RESET              => reset_i,
-	--			CLEAR              => clear_i,
-	--			CLK_EN             => '1',
-	--			--Internal Connection
-	--			MED_DATA_IN        => med_data_out,
-	--			MED_PACKET_NUM_IN  => med_packet_num_out,
-	--			MED_DATAREADY_IN   => med_dataready_out,
-	--			MED_READ_OUT       => med_read_in,
-	--			MED_DATA_OUT       => med_data_in,
-	--			MED_PACKET_NUM_OUT => med_packet_num_in,
-	--			MED_DATAREADY_OUT  => med_dataready_in,
-	--			MED_READ_IN        => med_read_out,
-	--			REFCLK2CORE_OUT    => open,
-	--			CLK_RX_HALF_OUT    => rx_clock_100,
-	--			CLK_RX_FULL_OUT    => rx_clock_200,
-	--
-	--			--SFP Connection
-	--			SD_RXD_P_IN        => SERDES_RX(2),
-	--			SD_RXD_N_IN        => SERDES_RX(3),
-	--			SD_TXD_P_OUT       => SERDES_TX(2),
-	--			SD_TXD_N_OUT       => SERDES_TX(3),
-	--			SD_REFCLK_P_IN     => open,
-	--			SD_REFCLK_N_IN     => open,
-	--			SD_PRSNT_N_IN      => FPGA5_COMM(0),
-	--			SD_LOS_IN          => FPGA5_COMM(0),
-	--			SD_TXDIS_OUT       => FPGA5_COMM(2),
-	--			SCI_DATA_IN        => sci1_data_in,
-	--			SCI_DATA_OUT       => sci1_data_out,
-	--			SCI_ADDR           => sci1_addr,
-	--			SCI_READ           => sci1_read,
-	--			SCI_WRITE          => sci1_write,
-	--			SCI_ACK            => sci1_ack,
-	--			-- Status and control port
-	--			STAT_OP            => med_stat_op,
-	--			CTRL_OP            => med_ctrl_op,
-	--			STAT_DEBUG         => med_stat_debug,
-	--			CTRL_DEBUG         => (others => '0')
-	--		);
+		THE_MEDIA_UPLINK : trb_net16_med_ecp3_sfp
+			generic map(
+				SERDES_NUM  => 1,           --number of serdes in quad
+				EXT_CLOCK   => c_NO,        --use internal clock
+				USE_200_MHZ => c_YES,       --run on 200 MHz clock
+				USE_CTC     => c_NO,
+				USE_SLAVE   => SYNC_MODE
+			)
+			port map(
+				CLK                => clk_200_i,
+				SYSCLK             => clk_100_i,
+				RESET              => reset_i,
+				CLEAR              => clear_i,
+				CLK_EN             => '1',
+				--Internal Connection
+				MED_DATA_IN        => med_data_out,
+				MED_PACKET_NUM_IN  => med_packet_num_out,
+				MED_DATAREADY_IN   => med_dataready_out,
+				MED_READ_OUT       => med_read_in,
+				MED_DATA_OUT       => med_data_in,
+				MED_PACKET_NUM_OUT => med_packet_num_in,
+				MED_DATAREADY_OUT  => med_dataready_in,
+				MED_READ_IN        => med_read_out,
+				REFCLK2CORE_OUT    => open,
+				CLK_RX_HALF_OUT    => rx_clock_100,
+				CLK_RX_FULL_OUT    => rx_clock_200,
+	
+				--SFP Connection
+				SD_RXD_P_IN        => SERDES_RX(2),
+				SD_RXD_N_IN        => SERDES_RX(3),
+				SD_TXD_P_OUT       => SERDES_TX(2),
+				SD_TXD_N_OUT       => SERDES_TX(3),
+				SD_REFCLK_P_IN     => open,
+				SD_REFCLK_N_IN     => open,
+				SD_PRSNT_N_IN      => FPGA5_COMM(0),
+				SD_LOS_IN          => FPGA5_COMM(0),
+				SD_TXDIS_OUT       => FPGA5_COMM(2),
+				SCI_DATA_IN        => sci1_data_in,
+				SCI_DATA_OUT       => sci1_data_out,
+				SCI_ADDR           => sci1_addr,
+				SCI_READ           => sci1_read,
+				SCI_WRITE          => sci1_write,
+				SCI_ACK            => sci1_ack,
+				-- Status and control port
+				STAT_OP            => med_stat_op,
+				CTRL_OP            => med_ctrl_op,
+				STAT_DEBUG         => med_stat_debug,
+				CTRL_DEBUG         => (others => '0')
+			);
 	
 
-	THE_MEDIA_UPLINK : entity work.trb_net16_med_sync2_ecp3_sfp
-		port map(
-			CLK                => clk_200_i,
-			SYSCLK             => clk_100_i,
-			RESET              => reset_i,
-			CLEAR              => clear_i,
-			CLK_EN             => '1',
-			--Internal Connection
-			MED_DATA_IN        => med_data_out,
-			MED_PACKET_NUM_IN  => med_packet_num_out,
-			MED_DATAREADY_IN   => med_dataready_out,
-			MED_READ_OUT       => med_read_in,
-			MED_DATA_OUT       => med_data_in,
-			MED_PACKET_NUM_OUT => med_packet_num_in,
-			MED_DATAREADY_OUT  => med_dataready_in,
-			MED_READ_IN        => med_read_out,
-			REFCLK2CORE_OUT    => open,
-			CLK_RX_HALF_OUT    => open,
-			CLK_RX_FULL_OUT    => SODA_clock_rx, --rx_clock_200,
-			--SFP Connection
-			SD_RXD_P_IN        => SERDES_RX(2),
-			SD_RXD_N_IN        => SERDES_RX(3),
-			SD_TXD_P_OUT       => SERDES_TX(2),
-			SD_TXD_N_OUT       => SERDES_TX(3),
-			SD_DLM_IN          => '0',
-			SD_DLM_WORD_IN     => (others => '0'),
-			SD_DLM_OUT         => DLM_from_uplink_S,
-			SD_DLM_WORD_OUT    => DLM_WORD_from_uplink_S,
-			SD_PRSNT_N_IN      => FPGA5_COMM(0),
-			SD_LOS_IN          => FPGA5_COMM(0),
-			SD_TXDIS_OUT       => FPGA5_COMM(2),
-			SCI_DATA_IN        => sci1_data_in,
-			SCI_DATA_OUT       => sci1_data_out,
-			SCI_ADDR           => sci1_addr,
-			SCI_READ           => sci1_read,
-			SCI_WRITE          => sci1_write,
-			SCI_ACK            => sci1_ack,
-			-- Status and control port
-			STAT_OP            => med_stat_op(15 downto 0),
-			CTRL_OP            => med_ctrl_op(15 downto 0),
-			STAT_DEBUG         => med_stat_debug(63 downto 0),
-			CTRL_DEBUG         => (others => '0')
-		);
+--	THE_MEDIA_UPLINK : entity work.trb_net16_med_sync2_ecp3_sfp
+--		port map(
+--			CLK                => clk_200_i,
+--			SYSCLK             => clk_100_i,
+--			RESET              => reset_i,
+--			CLEAR              => clear_i,
+--			CLK_EN             => '1',
+--			--Internal Connection
+--			MED_DATA_IN        => med_data_out,
+--			MED_PACKET_NUM_IN  => med_packet_num_out,
+--			MED_DATAREADY_IN   => med_dataready_out,
+--			MED_READ_OUT       => med_read_in,
+--			MED_DATA_OUT       => med_data_in,
+--			MED_PACKET_NUM_OUT => med_packet_num_in,
+--			MED_DATAREADY_OUT  => med_dataready_in,
+--			MED_READ_IN        => med_read_out,
+--			REFCLK2CORE_OUT    => open,
+--			CLK_RX_HALF_OUT    => open,
+--			CLK_RX_FULL_OUT    => SODA_clock_rx, --rx_clock_200,
+--			--SFP Connection
+--			SD_RXD_P_IN        => SERDES_RX(2),
+--			SD_RXD_N_IN        => SERDES_RX(3),
+--			SD_TXD_P_OUT       => SERDES_TX(2),
+--			SD_TXD_N_OUT       => SERDES_TX(3),
+--			SD_DLM_IN          => '0',
+--			SD_DLM_WORD_IN     => (others => '0'),
+--			SD_DLM_OUT         => DLM_from_uplink_S,
+--			SD_DLM_WORD_OUT    => DLM_WORD_from_uplink_S,
+--			SD_PRSNT_N_IN      => FPGA5_COMM(0),
+--			SD_LOS_IN          => FPGA5_COMM(0),
+--			SD_TXDIS_OUT       => FPGA5_COMM(2),
+--			SCI_DATA_IN        => sci1_data_in,
+--			SCI_DATA_OUT       => sci1_data_out,
+--			SCI_ADDR           => sci1_addr,
+--			SCI_READ           => sci1_read,
+--			SCI_WRITE          => sci1_write,
+--			SCI_ACK            => sci1_ack,
+--			-- Status and control port
+--			STAT_OP            => med_stat_op(15 downto 0),
+--			CTRL_OP            => med_ctrl_op(15 downto 0),
+--			STAT_DEBUG         => med_stat_debug(63 downto 0),
+--			CTRL_DEBUG         => (others => '0')
+--		);
 
 	DLLl_in200M_out200M1 : entity work.DLLl_in200M_out200M
 		port map(
