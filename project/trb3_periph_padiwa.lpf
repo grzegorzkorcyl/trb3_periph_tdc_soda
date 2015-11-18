@@ -1,4 +1,4 @@
-BLOCK RSTPATHS ;
+BLOCK RESETPATHS ;
 BLOCK ASYNCPATHS ;
 BLOCK RD_DURING_WR_PATHS ;
 
@@ -6,30 +6,30 @@ BLOCK RD_DURING_WR_PATHS ;
 #################################################################
 # Basic Settings
 #################################################################
-SYSCONFIG MCCLK_FRQ = 20;
-FRQUNCY PORT CLK_PCLK_RIGHT 200 MHz;
-FRQUNCY PORT CLK_GPLL_LFT  125 MHz;
-FRQUNCY PORT CLK_PCLK_LFT  200 MHz;
-FRQUNCY PORT CLK_GPLL_RIGHT 200 MHz;
+SYSCONFIG MCCLK_FREQ = 20;
+FREQUENCY PORT CLK_PCLK_RIGHT 200 MHz;
+FREQUENCY PORT CLK_GPLL_LEFT  125 MHz;
+FREQUENCY PORT CLK_PCLK_LEFT  200 MHz;
+FREQUENCY PORT CLK_GPLL_RIGHT 200 MHz;
 
-MULTICYCL FROM CLKNT "clk_100_internal" TO CLKNT "CLK_PCLK_LFT" 2 X ;
-MULTICYCL FROM CLKNT "CLK_PCLK_LFT" TO CLKNT "clk_100_internal" 2 X ;
+MULTICYCLE FROM CLKNET "clk_100_internal" TO CLKNET "CLK_PCLK_LEFT" 2 X ;
+MULTICYCLE FROM CLKNET "CLK_PCLK_LEFT" TO CLKNET "clk_100_internal" 2 X ;
 
-LOCAT COMP   "TH_MDIA_UPLINK/TH_SRDS/PCSD_INST" SIT "PCSA" ;
+LOCATE COMP   "THE_MEDIA_UPLINK/THE_SERDES/PCSD_INST" SITE "PCSA" ;
 
 #################################################################
 # Clock I/O
 #################################################################
-LOCAT COMP  "CLK_PCLK_RIGHT"       SIT "U20";
-LOCAT COMP  "CLK_SRDS_INT_RIGHT" SIT "AC18";
-LOCAT COMP  "CLK_SRDS_INT_LFT"  SIT "AC10";
-LOCAT COMP  "CLK_GPLL_LFT"        SIT "U25";
+LOCATE COMP  "CLK_PCLK_RIGHT"       SITE "U20";
+LOCATE COMP  "CLK_SERDES_INT_RIGHT" SITE "AC18";
+LOCATE COMP  "CLK_SERDES_INT_LEFT"  SITE "AC10";
+LOCATE COMP  "CLK_GPLL_LEFT"        SITE "U25";
 
-LOCAT COMP  "CLK_PCLK_LFT"        SIT "M4";
-LOCAT COMP  "CLK_GPLL_RIGHT"       SIT "W1";
+LOCATE COMP  "CLK_PCLK_LEFT"        SITE "M4";
+LOCATE COMP  "CLK_GPLL_RIGHT"       SITE "W1";
 
-DFIN PORT GROUP "CLK_group" "CLK*" ;
-IOBUF GROUP  "CLK_group" IO_TYP=LVDS25 ;
+DEFINE PORT GROUP "CLK_group" "CLK*" ;
+IOBUF GROUP  "CLK_group" IO_TYPE=LVDS25 ;
 
 
 #################################################################
@@ -37,11 +37,11 @@ IOBUF GROUP  "CLK_group" IO_TYP=LVDS25 ;
 #################################################################
 
 #Trigger from fan-out
-#LOCAT COMP  "TRIGGR_RIGHT"   SIT "N24";
-#IOBUF  PORT  "TRIGGR_RIGHT" IO_TYP=LVDS25; 
+#LOCATE COMP  "TRIGGER_RIGHT"   SITE "N24";
+#IOBUF  PORT  "TRIGGER_RIGHT" IO_TYPE=LVDS25; 
 
-LOCAT COMP  "TRIGGR_LFT"   SIT "V3";
-IOBUF  PORT  "TRIGGR_LFT"  IO_TYP=LVDS25;
+LOCATE COMP  "TRIGGER_LEFT"   SITE "V3";
+IOBUF  PORT  "TRIGGER_LEFT"  IO_TYPE=LVDS25;
 
 
 
@@ -49,150 +49,150 @@ IOBUF  PORT  "TRIGGR_LFT"  IO_TYP=LVDS25;
 # To central FPGA
 #################################################################
 
-LOCAT COMP  "FPGA5_COMM_0"   SIT "AD4";
-LOCAT COMP  "FPGA5_COMM_1"   SIT "A3";
-LOCAT COMP  "FPGA5_COMM_2"   SIT "AA7";
-LOCAT COMP  "FPGA5_COMM_3"   SIT "AB7";
-LOCAT COMP  "FPGA5_COMM_4"   SIT "AD3";
-LOCAT COMP  "FPGA5_COMM_5"   SIT "AC4";
-LOCAT COMP  "FPGA5_COMM_6"   SIT "A2";
-LOCAT COMP  "FPGA5_COMM_7"   SIT "AF3";
-LOCAT COMP  "FPGA5_COMM_8"   SIT "A4";
-LOCAT COMP  "FPGA5_COMM_9"   SIT "AF4";
-LOCAT COMP  "FPGA5_COMM_10"  SIT "V10";
-LOCAT COMP  "FPGA5_COMM_11"  SIT "W10";
-DFIN PORT GROUP "FPGA_group" "FPGA*" ;
-IOBUF GROUP "FPGA_group" IO_TYP=LVCMOS25 PULLMOD=UP ;
+LOCATE COMP  "FPGA5_COMM_0"   SITE "AD4";
+LOCATE COMP  "FPGA5_COMM_1"   SITE "AE3";
+LOCATE COMP  "FPGA5_COMM_2"   SITE "AA7";
+LOCATE COMP  "FPGA5_COMM_3"   SITE "AB7";
+LOCATE COMP  "FPGA5_COMM_4"   SITE "AD3";
+LOCATE COMP  "FPGA5_COMM_5"   SITE "AC4";
+LOCATE COMP  "FPGA5_COMM_6"   SITE "AE2";
+LOCATE COMP  "FPGA5_COMM_7"   SITE "AF3";
+LOCATE COMP  "FPGA5_COMM_8"   SITE "AE4";
+LOCATE COMP  "FPGA5_COMM_9"   SITE "AF4";
+LOCATE COMP  "FPGA5_COMM_10"  SITE "V10";
+LOCATE COMP  "FPGA5_COMM_11"  SITE "W10";
+DEFINE PORT GROUP "FPGA_group" "FPGA*" ;
+IOBUF GROUP "FPGA_group" IO_TYPE=LVCMOS25 PULLMODE=UP ;
 
-LOCAT COMP  "TST_LIN_0"   SIT "A5";
-LOCAT COMP  "TST_LIN_1"   SIT "A6";
-LOCAT COMP  "TST_LIN_2"   SIT "G8";
-LOCAT COMP  "TST_LIN_3"   SIT "F9";
-LOCAT COMP  "TST_LIN_4"   SIT "D9";
-LOCAT COMP  "TST_LIN_5"   SIT "D10";
-LOCAT COMP  "TST_LIN_6"   SIT "F10";
-LOCAT COMP  "TST_LIN_7"   SIT "10";
-LOCAT COMP  "TST_LIN_8"   SIT "A8";
-LOCAT COMP  "TST_LIN_9"   SIT "B8";
-LOCAT COMP  "TST_LIN_10"  SIT "G10";
-LOCAT COMP  "TST_LIN_11"  SIT "G9";
-LOCAT COMP  "TST_LIN_12"  SIT "C9";
-LOCAT COMP  "TST_LIN_13"  SIT "C10";
-LOCAT COMP  "TST_LIN_14"  SIT "H10";
-LOCAT COMP  "TST_LIN_15"  SIT "H11";
-DFIN PORT GROUP "TST_LIN_group" "TST_LIN*" ;
-IOBUF GROUP "TST_LIN_group" IO_TYP=LVCMOS25 PULLMOD=DOWN DRIV=12;
+LOCATE COMP  "TEST_LINE_0"   SITE "A5";
+LOCATE COMP  "TEST_LINE_1"   SITE "A6";
+LOCATE COMP  "TEST_LINE_2"   SITE "G8";
+LOCATE COMP  "TEST_LINE_3"   SITE "F9";
+LOCATE COMP  "TEST_LINE_4"   SITE "D9";
+LOCATE COMP  "TEST_LINE_5"   SITE "D10";
+LOCATE COMP  "TEST_LINE_6"   SITE "F10";
+LOCATE COMP  "TEST_LINE_7"   SITE "E10";
+LOCATE COMP  "TEST_LINE_8"   SITE "A8";
+LOCATE COMP  "TEST_LINE_9"   SITE "B8";
+LOCATE COMP  "TEST_LINE_10"  SITE "G10";
+LOCATE COMP  "TEST_LINE_11"  SITE "G9";
+LOCATE COMP  "TEST_LINE_12"  SITE "C9";
+LOCATE COMP  "TEST_LINE_13"  SITE "C10";
+LOCATE COMP  "TEST_LINE_14"  SITE "H10";
+LOCATE COMP  "TEST_LINE_15"  SITE "H11";
+DEFINE PORT GROUP "TEST_LINE_group" "TEST_LINE*" ;
+IOBUF GROUP "TEST_LINE_group" IO_TYPE=LVCMOS25 PULLMODE=DOWN DRIVE=12;
 
 #################################################################
 # TDC INPUTS
 #################################################################
 
-LOCAT COMP  "INP_0"    SIT "P1";  
-LOCAT COMP  "INP_1"    SIT "T2";  
-LOCAT COMP  "INP_2"    SIT "R1";  
-LOCAT COMP  "INP_3"    SIT "N3";  
-LOCAT COMP  "INP_4"    SIT "P5";  
-LOCAT COMP  "INP_5"    SIT "N5";   
-LOCAT COMP  "INP_6"    SIT "AC2";
-LOCAT COMP  "INP_7"    SIT "AB1";
-LOCAT COMP  "INP_8"    SIT "AA1";
-LOCAT COMP  "INP_9"    SIT "W7";
-LOCAT COMP  "INP_10"   SIT "Y5";
-LOCAT COMP  "INP_11"   SIT "V6";
-LOCAT COMP  "INP_12"   SIT "H2";
-LOCAT COMP  "INP_13"   SIT "H1";
-LOCAT COMP  "INP_14"   SIT "M5";
-LOCAT COMP  "INP_15"   SIT "L2";
-LOCAT COMP  "INP_16"   SIT "AD1";
-LOCAT COMP  "INP_17"   SIT "AB5";
-LOCAT COMP  "INP_18"   SIT "AB3";
-LOCAT COMP  "INP_19"   SIT "Y6";
-LOCAT COMP  "INP_20"   SIT "AA3";
-LOCAT COMP  "INP_21"   SIT "W8";
-LOCAT COMP  "INP_22"   SIT "V1";
-LOCAT COMP  "INP_23"   SIT "T1";
-LOCAT COMP  "INP_24"   SIT "P4";
-LOCAT COMP  "INP_25"   SIT "T3";
-LOCAT COMP  "INP_26"   SIT "R5";
-LOCAT COMP  "INP_27"   SIT "T7";
-LOCAT COMP  "INP_28"   SIT "K2";
-LOCAT COMP  "INP_29"   SIT "K4";
-LOCAT COMP  "INP_30"   SIT "1";
-LOCAT COMP  "INP_31"   SIT "B2";
-LOCAT COMP  "INP_32"   SIT "J23";
-LOCAT COMP  "INP_33"   SIT "G26";
-LOCAT COMP  "INP_34"   SIT "F24";
-LOCAT COMP  "INP_35"   SIT "H26";
-LOCAT COMP  "INP_36"   SIT "K23";
-LOCAT COMP  "INP_37"   SIT "F25";
-LOCAT COMP  "INP_38"   SIT "AC26";
-LOCAT COMP  "INP_39"   SIT "Y19";
-LOCAT COMP  "INP_40"   SIT "AB24";
-LOCAT COMP  "INP_41"   SIT "Y22";
-LOCAT COMP  "INP_42"   SIT "AD24";
-LOCAT COMP  "INP_43"   SIT "A25";
-LOCAT COMP  "INP_44"   SIT "W23";
-LOCAT COMP  "INP_45"   SIT "AA25";
-LOCAT COMP  "INP_46"   SIT "AA26";
-LOCAT COMP  "INP_47"   SIT "W21";
-LOCAT COMP  "INP_48"   SIT "H24";
-LOCAT COMP  "INP_49"   SIT "L20";
-LOCAT COMP  "INP_50"   SIT "K24";
-LOCAT COMP  "INP_51"   SIT "M23";
-LOCAT COMP  "INP_52"   SIT "L24";
-LOCAT COMP  "INP_53"   SIT "M22";
-LOCAT COMP  "INP_54"   SIT "J26";
-LOCAT COMP  "INP_55"   SIT "N23";
-LOCAT COMP  "INP_56"   SIT "K19";
-LOCAT COMP  "INP_57"   SIT "P23";                                         
-LOCAT COMP  "INP_58"   SIT "L25";
-LOCAT COMP  "INP_59"   SIT "P21";
-LOCAT COMP  "INP_60"   SIT "R25";
-LOCAT COMP  "INP_61"   SIT "T25";
-LOCAT COMP  "INP_62"   SIT "T26";
-LOCAT COMP  "INP_63"   SIT "V21";
+LOCATE COMP  "INP_0"    SITE "P1";  
+LOCATE COMP  "INP_1"    SITE "T2";  
+LOCATE COMP  "INP_2"    SITE "R1";  
+LOCATE COMP  "INP_3"    SITE "N3";  
+LOCATE COMP  "INP_4"    SITE "P5";  
+LOCATE COMP  "INP_5"    SITE "N5";   
+LOCATE COMP  "INP_6"    SITE "AC2";
+LOCATE COMP  "INP_7"    SITE "AB1";
+LOCATE COMP  "INP_8"    SITE "AA1";
+LOCATE COMP  "INP_9"    SITE "W7";
+LOCATE COMP  "INP_10"   SITE "Y5";
+LOCATE COMP  "INP_11"   SITE "V6";
+LOCATE COMP  "INP_12"   SITE "H2";
+LOCATE COMP  "INP_13"   SITE "H1";
+LOCATE COMP  "INP_14"   SITE "M5";
+LOCATE COMP  "INP_15"   SITE "L2";
+LOCATE COMP  "INP_16"   SITE "AD1";
+LOCATE COMP  "INP_17"   SITE "AB5";
+LOCATE COMP  "INP_18"   SITE "AB3";
+LOCATE COMP  "INP_19"   SITE "Y6";
+LOCATE COMP  "INP_20"   SITE "AA3";
+LOCATE COMP  "INP_21"   SITE "W8";
+LOCATE COMP  "INP_22"   SITE "V1";
+LOCATE COMP  "INP_23"   SITE "T1";
+LOCATE COMP  "INP_24"   SITE "P4";
+LOCATE COMP  "INP_25"   SITE "T3";
+LOCATE COMP  "INP_26"   SITE "R5";
+LOCATE COMP  "INP_27"   SITE "T7";
+LOCATE COMP  "INP_28"   SITE "K2";
+LOCATE COMP  "INP_29"   SITE "K4";
+LOCATE COMP  "INP_30"   SITE "E1";
+LOCATE COMP  "INP_31"   SITE "B2";
+LOCATE COMP  "INP_32"   SITE "J23";
+LOCATE COMP  "INP_33"   SITE "G26";
+LOCATE COMP  "INP_34"   SITE "F24";
+LOCATE COMP  "INP_35"   SITE "H26";
+LOCATE COMP  "INP_36"   SITE "K23";
+LOCATE COMP  "INP_37"   SITE "F25";
+LOCATE COMP  "INP_38"   SITE "AC26";
+LOCATE COMP  "INP_39"   SITE "Y19";
+LOCATE COMP  "INP_40"   SITE "AB24";
+LOCATE COMP  "INP_41"   SITE "Y22";
+LOCATE COMP  "INP_42"   SITE "AD24";
+LOCATE COMP  "INP_43"   SITE "AE25";
+LOCATE COMP  "INP_44"   SITE "W23";
+LOCATE COMP  "INP_45"   SITE "AA25";
+LOCATE COMP  "INP_46"   SITE "AA26";
+LOCATE COMP  "INP_47"   SITE "W21";
+LOCATE COMP  "INP_48"   SITE "H24";
+LOCATE COMP  "INP_49"   SITE "L20";
+LOCATE COMP  "INP_50"   SITE "K24";
+LOCATE COMP  "INP_51"   SITE "M23";
+LOCATE COMP  "INP_52"   SITE "L24";
+LOCATE COMP  "INP_53"   SITE "M22";
+LOCATE COMP  "INP_54"   SITE "J26";
+LOCATE COMP  "INP_55"   SITE "N23";
+LOCATE COMP  "INP_56"   SITE "K19";
+LOCATE COMP  "INP_57"   SITE "P23";                                         
+LOCATE COMP  "INP_58"   SITE "L25";
+LOCATE COMP  "INP_59"   SITE "P21";
+LOCATE COMP  "INP_60"   SITE "R25";
+LOCATE COMP  "INP_61"   SITE "T25";
+LOCATE COMP  "INP_62"   SITE "T26";
+LOCATE COMP  "INP_63"   SITE "V21";
 
-DFIN PORT GROUP "INP_group" "INP*" ;
-IOBUF GROUP "INP_group" IO_TYP=LVDS25; # DIFFRSISTOR=100;
-
-
+DEFINE PORT GROUP "INP_group" "INP*" ;
+IOBUF GROUP "INP_group" IO_TYPE=LVDS25; # DIFFRESISTOR=100;
 
 
 
-# LOCAT COMP  "DQUL_44"  SIT "L2";
-# LOCAT COMP  "DQUL_45"  SIT "L1";
-# LOCAT COMP  "OUT_H_SDO"   SIT "AA24";   #"DQLR_20"   DQLR1_6   #185
-# LOCAT COMP  "OUT_H_SDOb"   SIT "AA23";   #"DQLR_21"   DQLR1_7   #187
-# LOCAT COMP  "IN_H_SDI"   SIT "AD26";   #"DQLR_22"   DQLR1_8   #189
-# LOCAT COMP  "IN_H_SDIbD"   SIT "AD25";   #"DQLR_23"   DQLR1_9   #191
-# LOCAT COMP  "OUT_H_SCK"   SIT "U24";    #"DQLR_32"   DQLR2_6   #186
-# LOCAT COMP  "OUT_H_SCKb"   SIT "V24";    #"DQLR_33"   DQLR2_7   #188
-# LOCAT COMP  "OUT_H_CS"   SIT "U23";    #"DQLR_34"   DQLR2_8   #190
-# LOCAT COMP  "OUT_H_CSb"   SIT "U22";    #"DQLR_35"   DQLR2_9   #192
-# LOCAT COMP  "DQUL_0"    SIT "B2";     #"DQUL_0"    DQUL0_0   #74
-# LOCAT COMP  "DQUL_1"    SIT "B3";     #"DQUL_1"    DQUL0_1   #76
-# LOCAT COMP  "OUT_L_SDOb"    SIT "4";     #"DQUL_3"    DQUL0_3   #80
-# LOCAT COMP  "OUT_L_SCKb"    SIT "D3";     #"DQUL_5"    DQUL0_5   #84
-# LOCAT COMP  "IN_L_SDIb"    SIT "G6";     #"DQUL_7"    DQSUL0_C  #88
-# LOCAT COMP  "DQUL_8"    SIT "3";     #"DQUL_8"    DQUL0_6   #90
-# LOCAT COMP  "DQUL_9"    SIT "F4";     #"DQUL_9"    DQUL0_7   #92
-# LOCAT COMP  "OUT_L_CSb"   SIT "J6";     #"DQUL_11"   DQUL0_9   #96
-# LOCAT COMP  "DQUL_12"   SIT "G2";     #"DQUL_12"   DQUL1_0   #73
-# LOCAT COMP  "DQUL_13"   SIT "G3";     #"DQUL_13"   DQUL1_1   #75
-# LOCAT COMP  "DQUL_14"   SIT "F2";     #"DQUL_14"   DQUL1_2   #77
-# LOCAT COMP  "DQUL_15"   SIT "F3";     #"DQUL_15"   DQUL1_3   #79
-# LOCAT COMP  "DQUL_16"   SIT "C2";     #"DQUL_16"   DQUL1_4   #81
-# LOCAT COMP  "DQUL_17"   SIT "D2";     #"DQUL_17"   DQUL1_5   #83
-# LOCAT COMP  "DQUL_18"   SIT "K7";     #"DQUL_18"   DQSUL1_T  #85
-# LOCAT COMP  "DQUL_19"   SIT "K6";     #"DQUL_19"   DQSUL1_C  #87
-# LOCAT COMP  "DQUL_20"   SIT "H5";     #"DQUL_20"   DQUL1_6   #89
-# LOCAT COMP  "DQUL_21"   SIT "J5";     #"DQUL_21"   DQUL1_7   #91
-# LOCAT COMP  "DQUL_22"   SIT "K8";     #"DQUL_22"   DQUL1_8   #93
-# LOCAT COMP  "DQUL_23"   SIT "J7";     #"DQUL_23"   DQUL1_9   #95
-# LOCAT COMP  "DQUL_32"   SIT "1";     #"DQUL_32"   DQUL2_6   #66
-# LOCAT COMP  "DQUL_33"   SIT "F1";     #"DQUL_33"   DQUL2_7   #68
-# LOCAT COMP  "DQUL_34"   SIT "L5";     #"DQUL_34"   DQUL2_8   #70
-# LOCAT COMP  "DQUL_35"   SIT "L6";     #"DQUL_35"   DQUL2_9   #72
+
+
+# LOCATE COMP  "DQUL_44"  SITE "L2";
+# LOCATE COMP  "DQUL_45"  SITE "L1";
+# LOCATE COMP  "OUT_H_SDO"   SITE "AA24";   #"DQLR_20"   DQLR1_6   #185
+# LOCATE COMP  "OUT_H_SDOb"   SITE "AA23";   #"DQLR_21"   DQLR1_7   #187
+# LOCATE COMP  "IN_H_SDI"   SITE "AD26";   #"DQLR_22"   DQLR1_8   #189
+# LOCATE COMP  "IN_H_SDIbD"   SITE "AD25";   #"DQLR_23"   DQLR1_9   #191
+# LOCATE COMP  "OUT_H_SCK"   SITE "U24";    #"DQLR_32"   DQLR2_6   #186
+# LOCATE COMP  "OUT_H_SCKb"   SITE "V24";    #"DQLR_33"   DQLR2_7   #188
+# LOCATE COMP  "OUT_H_CS"   SITE "U23";    #"DQLR_34"   DQLR2_8   #190
+# LOCATE COMP  "OUT_H_CSb"   SITE "U22";    #"DQLR_35"   DQLR2_9   #192
+# LOCATE COMP  "DQUL_0"    SITE "B2";     #"DQUL_0"    DQUL0_0   #74
+# LOCATE COMP  "DQUL_1"    SITE "B3";     #"DQUL_1"    DQUL0_1   #76
+# LOCATE COMP  "OUT_L_SDOb"    SITE "E4";     #"DQUL_3"    DQUL0_3   #80
+# LOCATE COMP  "OUT_L_SCKb"    SITE "D3";     #"DQUL_5"    DQUL0_5   #84
+# LOCATE COMP  "IN_L_SDIb"    SITE "G6";     #"DQUL_7"    DQSUL0_C  #88
+# LOCATE COMP  "DQUL_8"    SITE "E3";     #"DQUL_8"    DQUL0_6   #90
+# LOCATE COMP  "DQUL_9"    SITE "F4";     #"DQUL_9"    DQUL0_7   #92
+# LOCATE COMP  "OUT_L_CSb"   SITE "J6";     #"DQUL_11"   DQUL0_9   #96
+# LOCATE COMP  "DQUL_12"   SITE "G2";     #"DQUL_12"   DQUL1_0   #73
+# LOCATE COMP  "DQUL_13"   SITE "G3";     #"DQUL_13"   DQUL1_1   #75
+# LOCATE COMP  "DQUL_14"   SITE "F2";     #"DQUL_14"   DQUL1_2   #77
+# LOCATE COMP  "DQUL_15"   SITE "F3";     #"DQUL_15"   DQUL1_3   #79
+# LOCATE COMP  "DQUL_16"   SITE "C2";     #"DQUL_16"   DQUL1_4   #81
+# LOCATE COMP  "DQUL_17"   SITE "D2";     #"DQUL_17"   DQUL1_5   #83
+# LOCATE COMP  "DQUL_18"   SITE "K7";     #"DQUL_18"   DQSUL1_T  #85
+# LOCATE COMP  "DQUL_19"   SITE "K6";     #"DQUL_19"   DQSUL1_C  #87
+# LOCATE COMP  "DQUL_20"   SITE "H5";     #"DQUL_20"   DQUL1_6   #89
+# LOCATE COMP  "DQUL_21"   SITE "J5";     #"DQUL_21"   DQUL1_7   #91
+# LOCATE COMP  "DQUL_22"   SITE "K8";     #"DQUL_22"   DQUL1_8   #93
+# LOCATE COMP  "DQUL_23"   SITE "J7";     #"DQUL_23"   DQUL1_9   #95
+# LOCATE COMP  "DQUL_32"   SITE "E1";     #"DQUL_32"   DQUL2_6   #66
+# LOCATE COMP  "DQUL_33"   SITE "F1";     #"DQUL_33"   DQUL2_7   #68
+# LOCATE COMP  "DQUL_34"   SITE "L5";     #"DQUL_34"   DQUL2_8   #70
+# LOCATE COMP  "DQUL_35"   SITE "L6";     #"DQUL_35"   DQUL2_9   #72
 
 #################################################################
 # Additional Lines to AddOn
@@ -201,1078 +201,1078 @@ IOBUF GROUP "INP_group" IO_TYP=LVDS25; # DIFFRSISTOR=100;
 #Lines 0/1 are terminated with 100 Ohm, pads available on 0-3
 #all lines are input only
 #line 4/5 go to PLL input
-#LOCAT COMP  "SPAR_LIN_0"    SIT "M25"; #194
-#LOCAT COMP  "SPAR_LIN_1"    SIT "M26"; #196
-#LOCAT COMP  "SPAR_LIN_2"    SIT "W4";  #198
-#LOCAT COMP  "SPAR_LIN_3"    SIT "W5";  #200
+#LOCATE COMP  "SPARE_LINE_0"    SITE "M25"; #194
+#LOCATE COMP  "SPARE_LINE_1"    SITE "M26"; #196
+#LOCATE COMP  "SPARE_LINE_2"    SITE "W4";  #198
+#LOCATE COMP  "SPARE_LINE_3"    SITE "W5";  #200
 
 
 #################################################################
 # DAC SPI & Flash ROM & Reboot
 #################################################################
 
-LOCAT COMP  "FLASH_CLK"    SIT "B12";
-LOCAT COMP  "FLASH_CS"   SIT "11";
-LOCAT COMP  "FLASH_DIN"   SIT "12";
-LOCAT COMP  "FLASH_DOUT"    SIT "A12";
+LOCATE COMP  "FLASH_CLK"    SITE "B12";
+LOCATE COMP  "FLASH_CS"   SITE "E11";
+LOCATE COMP  "FLASH_DIN"   SITE "E12";
+LOCATE COMP  "FLASH_DOUT"    SITE "A12";
 
-DFIN PORT GROUP "FLASH_group" "FLASH*" ;
-IOBUF GROUP "FLASH_group" IO_TYP=LVCMOS25 PULLMOD=NON;
+DEFINE PORT GROUP "FLASH_group" "FLASH*" ;
+IOBUF GROUP "FLASH_group" IO_TYPE=LVCMOS25 PULLMODE=NONE;
 
-LOCAT COMP  "PROGRAMN"   SIT "B11";
-IOBUF  PORT "PROGRAMN" IO_TYP=LVCMOS25 PULLMOD=UP DRIV=8  ;
-
-
-#LOCAT COMP  "OUT_SDO_1"    SIT "K3"; 
-#LOCAT COMP  "OUT_SDO_2"    SIT "F2"; 
-#LOCAT COMP  "OUT_SDO_3"    SIT "AA24"; 
-#LOCAT COMP  "OUT_SDO_4"    SIT "C3"; 
-
-#LOCAT COMP  "OUT_SCK_1"    SIT "J4"; 
-#LOCAT COMP  "OUT_SCK_2"    SIT "D4"; 
-#LOCAT COMP  "OUT_SCK_3"    SIT "U24"; 
-#LOCAT COMP  "OUT_SCK_4"    SIT "L5"; 
-
-#LOCAT COMP  "IN_SDI_1"     SIT "C2"; 
-#LOCAT COMP  "IN_SDI_2"     SIT "H5"; 
-#LOCAT COMP  "IN_SDI_3"     SIT "AD26"; 
-#LOCAT COMP  "IN_SDI_4"     SIT "G5"; 
-
-#LOCAT COMP  "OUT_CS_1"     SIT "D1"; 
-#LOCAT COMP  "OUT_CS_2"     SIT "H6"; 
-#LOCAT COMP  "OUT_CS_3"     SIT "U23"; 
-#LOCAT COMP  "OUT_CS_4"     SIT "K8"; 
+LOCATE COMP  "PROGRAMN"   SITE "B11";
+IOBUF  PORT "PROGRAMN" IO_TYPE=LVCMOS25 PULLMODE=UP DRIVE=8  ;
 
 
-LOCAT COMP "DAC_IN_SDI" SIT "H5";
-LOCAT COMP "DAC_OUT_SCK" SIT "K7";
-LOCAT COMP "DAC_OUT_CS" SIT "K8";
-LOCAT COMP "DAC_OUT_SDO" SIT "C2";
+#LOCATE COMP  "OUT_SDO_1"    SITE "K3"; 
+#LOCATE COMP  "OUT_SDO_2"    SITE "F2"; 
+#LOCATE COMP  "OUT_SDO_3"    SITE "AA24"; 
+#LOCATE COMP  "OUT_SDO_4"    SITE "C3"; 
 
-DFIN PORT GROUP "IN_group" "DAC_IN_*" ;
-IOBUF GROUP "IN_group" IO_TYP=LVCMOS25; # DIFFRSISTOR=100;
+#LOCATE COMP  "OUT_SCK_1"    SITE "J4"; 
+#LOCATE COMP  "OUT_SCK_2"    SITE "D4"; 
+#LOCATE COMP  "OUT_SCK_3"    SITE "U24"; 
+#LOCATE COMP  "OUT_SCK_4"    SITE "L5"; 
 
-DFIN PORT GROUP "OUT_group" "DAC_OUT_*" ;
-IOBUF GROUP "OUT_group" IO_TYP=LVCMOS25;
+#LOCATE COMP  "IN_SDI_1"     SITE "C2"; 
+#LOCATE COMP  "IN_SDI_2"     SITE "H5"; 
+#LOCATE COMP  "IN_SDI_3"     SITE "AD26"; 
+#LOCATE COMP  "IN_SDI_4"     SITE "G5"; 
 
-#LOCAT COMP  "DAC_SDI"   SIT "G6";   #"DQUL_7"   DQSUL0_C  #88   #IN_L_SDIb
-#LOCAT COMP  "DAC_SCK"   SIT "4";   #"DQUL_3"   DQUL0_3   #80   #OUT_L_SDOb
-#LOCAT COMP  "DAC_CS_0"  SIT "C3";   #"DQUL_4"   DQUL0_4   #82   #OUT_L_SCK
-#LOCAT COMP  "DAC_CS_1"  SIT "D3";   #"DQUL_5"   DQUL0_5   #84   #OUT_L_SCKb
-#LOCAT COMP  "DAC_CS_2"  SIT "H6";   #"DQUL_10"  DQUL0_8   #94   #OUT_L_CS
-#LOCAT COMP  "DAC_CS_3"  SIT "J6";   #"DQUL_11"  DQUL0_9   #96   #OUT_L_CSb
+#LOCATE COMP  "OUT_CS_1"     SITE "D1"; 
+#LOCATE COMP  "OUT_CS_2"     SITE "H6"; 
+#LOCATE COMP  "OUT_CS_3"     SITE "U23"; 
+#LOCATE COMP  "OUT_CS_4"     SITE "K8"; 
+
+
+LOCATE COMP "DAC_IN_SDI" SITE "H5";
+LOCATE COMP "DAC_OUT_SCK" SITE "K7";
+LOCATE COMP "DAC_OUT_CS" SITE "K8";
+LOCATE COMP "DAC_OUT_SDO" SITE "C2";
+
+DEFINE PORT GROUP "IN_group" "DAC_IN_*" ;
+IOBUF GROUP "IN_group" IO_TYPE=LVCMOS25; # DIFFRESISTOR=100;
+
+DEFINE PORT GROUP "OUT_group" "DAC_OUT_*" ;
+IOBUF GROUP "OUT_group" IO_TYPE=LVCMOS25;
+
+#LOCATE COMP  "DAC_SDI"   SITE "G6";   #"DQUL_7"   DQSUL0_C  #88   #IN_L_SDIb
+#LOCATE COMP  "DAC_SCK"   SITE "E4";   #"DQUL_3"   DQUL0_3   #80   #OUT_L_SDOb
+#LOCATE COMP  "DAC_CS_0"  SITE "C3";   #"DQUL_4"   DQUL0_4   #82   #OUT_L_SCK
+#LOCATE COMP  "DAC_CS_1"  SITE "D3";   #"DQUL_5"   DQUL0_5   #84   #OUT_L_SCKb
+#LOCATE COMP  "DAC_CS_2"  SITE "H6";   #"DQUL_10"  DQUL0_8   #94   #OUT_L_CS
+#LOCATE COMP  "DAC_CS_3"  SITE "J6";   #"DQUL_11"  DQUL0_9   #96   #OUT_L_CSb
 #
-#DFIN PORT GROUP "DAC_group" "DAC*" ;
-#IOBUF GROUP "DAC_group" IO_TYP=LVCMOS33 PULLMOD=NON;
+#DEFINE PORT GROUP "DAC_group" "DAC*" ;
+#IOBUF GROUP "DAC_group" IO_TYPE=LVCMOS33 PULLMODE=NONE;
 
 
 #################################################################
 # Misc
 #################################################################
-LOCAT COMP  "TMPSNS"    SIT "A13";
-IOBUF  PORT "TMPSNS" IO_TYP=LVCMOS25 PULLMOD=UP DRIV=8  ;
+LOCATE COMP  "TEMPSENS"    SITE "A13";
+IOBUF  PORT "TEMPSENS" IO_TYPE=LVCMOS25 PULLMODE=UP DRIVE=8  ;
 
 #coding of FPGA number
-LOCAT COMP "COD_LIN_1"    SIT "AA20";
-LOCAT COMP "COD_LIN_0"    SIT "Y21";
-IOBUF  PORT "COD_LIN_1" IO_TYP=LVCMOS25 PULLMOD=UP  ;
-IOBUF  PORT "COD_LIN_0" IO_TYP=LVCMOS25 PULLMOD=UP  ;
+LOCATE COMP "CODE_LINE_1"    SITE "AA20";
+LOCATE COMP "CODE_LINE_0"    SITE "Y21";
+IOBUF  PORT "CODE_LINE_1" IO_TYPE=LVCMOS25 PULLMODE=UP  ;
+IOBUF  PORT "CODE_LINE_0" IO_TYPE=LVCMOS25 PULLMODE=UP  ;
 
 #terminated differential pair to pads
-LOCAT COMP  "SUPPL"   SIT "C14";
-IOBUF  PORT "SUPPL" IO_TYP=LVDS25   ;
+LOCATE COMP  "SUPPL"   SITE "C14";
+IOBUF  PORT "SUPPL" IO_TYPE=LVDS25   ;
 
 
 #################################################################
-# LD
+# LED
 #################################################################
-LOCAT COMP  "LD_GRN"    SIT "F12";
-LOCAT COMP  "LD_ORANG"   SIT "G13";
-LOCAT COMP  "LD_RD"      SIT "A15";
-LOCAT COMP  "LD_YLLOW"   SIT "A16";
-DFIN PORT GROUP "LD_group" "LD*" ;
-IOBUF GROUP "LD_group" IO_TYP=LVCMOS25 PULLMOD=NON DRIV=12;
+LOCATE COMP  "LED_GREEN"    SITE "F12";
+LOCATE COMP  "LED_ORANGE"   SITE "G13";
+LOCATE COMP  "LED_RED"      SITE "A15";
+LOCATE COMP  "LED_YELLOW"   SITE "A16";
+DEFINE PORT GROUP "LED_group" "LED*" ;
+IOBUF GROUP "LED_group" IO_TYPE=LVCMOS25 PULLMODE=NONE DRIVE=12;
 #################################################################
 # Reset Nets
 #################################################################  
-GSR_NT NT "reset_i";  
+GSR_NET NET "reset_i";  
 
 #################################################################
 # Locate Serdes and media interfaces
 #################################################################
 
-MULTICYCL TO CLL "TH_MDIA_DOWNLINK/SCI_DATA_OUT*" 50 ns;
-MULTICYCL TO CLL "TH_MDIA_UPLINK/SCI_DATA_OUT*" 50 ns;
-MULTICYCL TO CLL "TH_RST_HANDLR/final_reset*" 30 ns;
-MULTICYCL TO CLL "TH_RST_HANDLR/trb_reset_*" 20 ns;
-MULTICYCL TO CLL "gen_SPI.TH_DAC_SPI_*io*" 20 ns;
-MULTICYCL TO CLL "TH_SPI_RLOAD_TH_SPI_MASTR_TH_SPI_SLIM_tx_sreg_oregio*" 20 ns;
+MULTICYCLE TO CELL "THE_MEDIA_DOWNLINK/SCI_DATA_OUT*" 50 ns;
+MULTICYCLE TO CELL "THE_MEDIA_UPLINK/SCI_DATA_OUT*" 50 ns;
+MULTICYCLE TO CELL "THE_RESET_HANDLER/final_reset*" 30 ns;
+MULTICYCLE TO CELL "THE_RESET_HANDLER/trb_reset_*" 20 ns;
+MULTICYCLE TO CELL "gen_SPI.THE_DAC_SPI_*io*" 20 ns;
+MULTICYCLE TO CELL "THE_SPI_RELOAD_THE_SPI_MASTER_THE_SPI_SLIM_tx_sreg_oregio*" 20 ns;
 
-BLOCK PATH TO CLL "gen_TRIGGR_LOGIC_TH_TRIG_LOGIC/out_*";
+BLOCK PATH TO CELL "gen_TRIGGER_LOGIC_THE_TRIG_LOGIC/out_*";
 
 #Jan: Placement of TrbNet components (at least, most of them)
 
 
-MULTICYCL FROM CLL "TH_RST_HANDLR/final_reset*" 30 ns;
+MULTICYCLE FROM CELL "THE_RESET_HANDLER/final_reset*" 30 ns;
 
 
 
-RGION "RGION_SPI" "R2C110D"  16 18 DVSIZ;
-LOCAT UGROUP "TH_SPI_RLOAD/TH_SPI_MASTR/SPI_group" RGION "RGION_SPI";
-LOCAT UGROUP "TH_SPI_RLOAD/TH_SPI_MMORY/SPI_group" RGION "RGION_SPI";
+REGION "REGION_SPI" "R2C110D"  16 18 DEVSIZE;
+LOCATE UGROUP "THE_SPI_RELOAD/THE_SPI_MASTER/SPI_group" REGION "REGION_SPI";
+LOCATE UGROUP "THE_SPI_RELOAD/THE_SPI_MEMORY/SPI_group" REGION "REGION_SPI";
 
 
 
-RGION "RGION_TRBNT" "R35C110D"  70 18 DVSIZ;
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/MPLX/MUX_group" RGION "RGION_TRBNT";
+REGION "REGION_TRBNET" "R35C110D"  70 18 DEVSIZE;
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/MPLEX/MUX_group" REGION "REGION_TRBNET";
 
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.0.geniobuf.IOBUF/GN_IBUF.TH_IBUF/IBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.1.geniobuf.IOBUF/GN_IBUF.TH_IBUF/IBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.IOBUF/GN_IBUF.TH_IBUF/IBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.0.geniobuf.IOBUF/genRPLYOBUF1.RPLYOBUF/OBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.1.geniobuf.IOBUF/genRPLYOBUF1.RPLYOBUF/OBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.IOBUF/genRPLYOBUF1.RPLYOBUF/OBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.0.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.1.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" RGION "RGION_TRBNT";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.0.geniobuf.IOBUF/GEN_IBUF.THE_IBUF/IBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.1.geniobuf.IOBUF/GEN_IBUF.THE_IBUF/IBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.IOBUF/GEN_IBUF.THE_IBUF/IBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.0.geniobuf.IOBUF/genREPLYOBUF1.REPLYOBUF/OBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.1.geniobuf.IOBUF/genREPLYOBUF1.REPLYOBUF/OBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.IOBUF/genREPLYOBUF1.REPLYOBUF/OBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.0.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.1.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.IOBUF/genINITOBUF2.gen_INITOBUF3.INITOBUF/OBUF_group" REGION "REGION_TRBNET";
 
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.1.geniobuf.gen_api.DAT_PASSIV_API/API_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.gen_api.DAT_PASSIV_API/API_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.2.gentermbuf.termbuf/TRMBUF_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.gen_regio.regIO/the_addresses/HUBLOGIC_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_NDPOINT/genbuffers.3.geniobuf.gen_regio.regIO/RegIO_group" RGION "RGION_TRBNT";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.1.geniobuf.gen_api.DAT_PASSIVE_API/API_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.gen_api.DAT_PASSIVE_API/API_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.2.gentermbuf.termbuf/TRMBUF_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.gen_regio.regIO/the_addresses/HUBLOGIC_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_ENDPOINT/genbuffers.3.geniobuf.gen_regio.regIO/RegIO_group" REGION "REGION_TRBNET";
 
-LOCAT UGROUP "TH_BUS_HANDLR/Bus_handler_group" RGION "RGION_TRBNT";
-LOCAT UGROUP "TH_NDPOINT/TH_INTRNAL_BUS_HANDLR/Bus_handler_group" RGION "RGION_TRBNT";
+LOCATE UGROUP "THE_BUS_HANDLER/Bus_handler_group" REGION "REGION_TRBNET";
+LOCATE UGROUP "THE_ENDPOINT/THE_INTERNAL_BUS_HANDLER/Bus_handler_group" REGION "REGION_TRBNET";
 
 #################################################################
 # TDC Constraints
 #################################################################
 ##############################################################################
-##	            DLAY LIN and HIT BUFFR PLACMNTS                    ##
+##	            DELAY LINE and HIT BUFFER PLACEMENTS                    ##
 ##############################################################################
 ##############################################################################
 UGROUP "Ref_Ch" BBOX 1 48 
-       BLKNAM TH_TDC/ReferenceChannel/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "Ref_Ch" SIT "R32C2D" ;
+       BLKNAME THE_TDC/ReferenceChannel/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "Ref_Ch" SITE "R32C2D" ;
 UGROUP "hitBuf_ref" BBOX 1 1
-       BLKNAM TH_TDC/hit_mux_ref;
-LOCAT UGROUP "hitBuf_ref" SIT "R33C3D" ;
+       BLKNAME THE_TDC/hit_mux_ref;
+LOCATE UGROUP "hitBuf_ref" SITE "R33C3D" ;
 UGROUP "Ref_ff_en"  BBOX 1 1
-       BLKNAM TH_TDC/ReferenceChannel/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "Ref_ff_en" SIT "R32C27D" ;
+       BLKNAME THE_TDC/ReferenceChannel/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "Ref_ff_en" SITE "R32C27D" ;
 #
 UGROUP "FC_1" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.1.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_1" SIT "R30C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.1.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_1" SITE "R30C2D" ;
 UGROUP "hitBuf_1" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.1.hit_mux_ch;
-LOCAT UGROUP "hitBuf_1" SIT "R31C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.1.hit_mux_ch;
+LOCATE UGROUP "hitBuf_1" SITE "R31C3D" ;
 UGROUP "ff_en_1" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.1.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.1.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_1" SIT "R30C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.1.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.1.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_1" SITE "R30C27D" ;
 #
 UGROUP "FC_2" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.2.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_2" SIT "R48C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.2.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_2" SITE "R48C2D" ;
 UGROUP "hitBuf_2" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.2.hit_mux_ch;
-LOCAT UGROUP "hitBuf_2" SIT "R49C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.2.hit_mux_ch;
+LOCATE UGROUP "hitBuf_2" SITE "R49C3D" ;
 UGROUP "ff_en_2" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.2.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.2.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_2" SIT "R48C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.2.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.2.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_2" SITE "R48C27D" ;
 #
 UGROUP "FC_3" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.3.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_3" SIT "R35C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.3.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_3" SITE "R35C2D" ;
 UGROUP "hitBuf_3" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.3.hit_mux_ch;
-LOCAT UGROUP "hitBuf_3" SIT "R36C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.3.hit_mux_ch;
+LOCATE UGROUP "hitBuf_3" SITE "R36C3D" ;
 UGROUP "ff_en_3" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.3.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.3.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_3" SIT "R35C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.3.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.3.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_3" SITE "R35C27D" ;
 #
 UGROUP "FC_4" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.4.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_4" SIT "R37C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.4.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_4" SITE "R37C2D" ;
 UGROUP "hitBuf_4" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.4.hit_mux_ch;
-LOCAT UGROUP "hitBuf_4" SIT "R38C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.4.hit_mux_ch;
+LOCATE UGROUP "hitBuf_4" SITE "R38C3D" ;
 UGROUP "ff_en_4" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.4.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.4.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_4" SIT "R37C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.4.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.4.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_4" SITE "R37C27D" ;
 #
 UGROUP "FC_5" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.5.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_5" SIT "R50C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.5.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_5" SITE "R50C2D" ;
 UGROUP "hitBuf_5" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.5.hit_mux_ch;
-LOCAT UGROUP "hitBuf_5" SIT "R51C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.5.hit_mux_ch;
+LOCATE UGROUP "hitBuf_5" SITE "R51C3D" ;
 UGROUP "ff_en_5" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.5.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.5.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_5" SIT "R50C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.5.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.5.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_5" SITE "R50C27D" ;
 #
 UGROUP "FC_6" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.6.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_6" SIT "R71C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.6.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_6" SITE "R71C2D" ;
 UGROUP "hitBuf_6" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.6.hit_mux_ch;
-LOCAT UGROUP "hitBuf_6" SIT "R72C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.6.hit_mux_ch;
+LOCATE UGROUP "hitBuf_6" SITE "R72C3D" ;
 UGROUP "ff_en_6" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.6.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.6.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_6" SIT "R71C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.6.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.6.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_6" SITE "R71C27D" ;
 #
 UGROUP "FC_7" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.7.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_7" SIT "R86C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.7.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_7" SITE "R86C2D" ;
 UGROUP "hitBuf_7" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.7.hit_mux_ch;
-LOCAT UGROUP "hitBuf_7" SIT "R87C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.7.hit_mux_ch;
+LOCATE UGROUP "hitBuf_7" SITE "R87C3D" ;
 UGROUP "ff_en_7" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.7.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.7.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_7" SIT "R86C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.7.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.7.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_7" SITE "R86C27D" ;
 #
 UGROUP "FC_8" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.8.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_8" SIT "R84C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.8.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_8" SITE "R84C2D" ;
 UGROUP "hitBuf_8" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.8.hit_mux_ch;
-LOCAT UGROUP "hitBuf_8" SIT "R85C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.8.hit_mux_ch;
+LOCATE UGROUP "hitBuf_8" SITE "R85C3D" ;
 UGROUP "ff_en_8" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.8.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.8.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_8" SIT "R84C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.8.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.8.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_8" SITE "R84C27D" ;
 #
 UGROUP "FC_9" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.9.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_9" SIT "R73C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.9.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_9" SITE "R73C2D" ;
 UGROUP "hitBuf_9" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.9.hit_mux_ch;
-LOCAT UGROUP "hitBuf_9" SIT "R74C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.9.hit_mux_ch;
+LOCATE UGROUP "hitBuf_9" SITE "R74C3D" ;
 UGROUP "ff_en_9" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.9.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.9.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_9" SIT "R73C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.9.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.9.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_9" SITE "R73C27D" ;
 #
 UGROUP "FC_10" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.10.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_10" SIT "R102C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.10.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_10" SITE "R102C2D" ;
 UGROUP "hitBuf_10" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.10.hit_mux_ch;
-LOCAT UGROUP "hitBuf_10" SIT "R103C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.10.hit_mux_ch;
+LOCATE UGROUP "hitBuf_10" SITE "R103C3D" ;
 UGROUP "ff_en_10" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.10.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.10.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_10" SIT "R102C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.10.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.10.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_10" SITE "R102C27D" ;
 #
 UGROUP "FC_11" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.11.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_11" SIT "R104C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.11.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_11" SITE "R104C2D" ;
 UGROUP "hitBuf_11" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.11.hit_mux_ch;
-LOCAT UGROUP "hitBuf_11" SIT "R105C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.11.hit_mux_ch;
+LOCATE UGROUP "hitBuf_11" SITE "R105C3D" ;
 UGROUP "ff_en_11" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.11.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.11.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_11" SIT "R104C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.11.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.11.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_11" SITE "R104C27D" ;
 #
 UGROUP "FC_12" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.12.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_12" SIT "R91C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.12.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_12" SITE "R91C2D" ;
 UGROUP "hitBuf_12" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.12.hit_mux_ch;
-LOCAT UGROUP "hitBuf_12" SIT "R92C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.12.hit_mux_ch;
+LOCATE UGROUP "hitBuf_12" SITE "R92C3D" ;
 UGROUP "ff_en_12" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.12.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.12.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_12" SIT "R91C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.12.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.12.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_12" SITE "R91C27D" ;
 #
 UGROUP "FC_13" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.13.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_13" SIT "R8C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.13.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_13" SITE "R8C2D" ;
 UGROUP "hitBuf_13" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.13.hit_mux_ch;
-LOCAT UGROUP "hitBuf_13" SIT "R9C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.13.hit_mux_ch;
+LOCATE UGROUP "hitBuf_13" SITE "R9C3D" ;
 UGROUP "ff_en_13" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.13.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.13.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_13" SIT "R8C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.13.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.13.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_13" SITE "R8C27D" ;
 #
 UGROUP "FC_14" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.14.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_14" SIT "R10C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.14.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_14" SITE "R10C2D" ;
 UGROUP "hitBuf_14" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.14.hit_mux_ch;
-LOCAT UGROUP "hitBuf_14" SIT "R11C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.14.hit_mux_ch;
+LOCATE UGROUP "hitBuf_14" SITE "R11C3D" ;
 UGROUP "ff_en_14" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.14.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.14.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_14" SIT "R10C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.14.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.14.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_14" SITE "R10C27D" ;
 #
 UGROUP "FC_15" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.15.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_15" SIT "R21C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.15.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_15" SITE "R21C2D" ;
 UGROUP "hitBuf_15" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.15.hit_mux_ch;
-LOCAT UGROUP "hitBuf_15" SIT "R22C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.15.hit_mux_ch;
+LOCATE UGROUP "hitBuf_15" SITE "R22C3D" ;
 UGROUP "ff_en_15" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.15.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.15.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_15" SIT "R21C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.15.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.15.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_15" SITE "R21C27D" ;
 #
 UGROUP "FC_16" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.16.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_16" SIT "R23C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.16.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_16" SITE "R23C2D" ;
 UGROUP "hitBuf_16" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.16.hit_mux_ch;
-LOCAT UGROUP "hitBuf_16" SIT "R24C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.16.hit_mux_ch;
+LOCATE UGROUP "hitBuf_16" SITE "R24C3D" ;
 UGROUP "ff_en_16" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.16.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.16.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_16" SIT "R23C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.16.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.16.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_16" SITE "R23C27D" ;
 #
 UGROUP "FC_17" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.17.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_17" SIT "R104C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.17.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_17" SITE "R104C58D" ;
 UGROUP "hitBuf_17" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.17.hit_mux_ch;
-LOCAT UGROUP "hitBuf_17" SIT "R105C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.17.hit_mux_ch;
+LOCATE UGROUP "hitBuf_17" SITE "R105C59D" ;
 UGROUP "ff_en_17" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.17.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.17.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_17" SIT "R104C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.17.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.17.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_17" SITE "R104C83D" ;
 #
 UGROUP "FC_18" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.18.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_18" SIT "R89C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.18.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_18" SITE "R89C58D" ;
 UGROUP "hitBuf_18" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.18.hit_mux_ch;
-LOCAT UGROUP "hitBuf_18" SIT "R90C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.18.hit_mux_ch;
+LOCATE UGROUP "hitBuf_18" SITE "R90C59D" ;
 UGROUP "ff_en_18" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.18.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.18.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_18" SIT "R89C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.18.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.18.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_18" SITE "R89C83D" ;
 #
 UGROUP "FC_19" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.19.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_19" SIT "R91C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.19.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_19" SITE "R91C58D" ;
 UGROUP "hitBuf_19" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.19.hit_mux_ch;
-LOCAT UGROUP "hitBuf_19" SIT "R92C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.19.hit_mux_ch;
+LOCATE UGROUP "hitBuf_19" SITE "R92C59D" ;
 UGROUP "ff_en_19" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.19.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.19.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_19" SIT "R91C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.19.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.19.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_19" SITE "R91C83D" ;
 #
 UGROUP "FC_20" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.20.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_20" SIT "R102C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.20.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_20" SITE "R102C58D" ;
 UGROUP "hitBuf_20" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.20.hit_mux_ch;
-LOCAT UGROUP "hitBuf_20" SIT "R103C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.20.hit_mux_ch;
+LOCATE UGROUP "hitBuf_20" SITE "R103C59D" ;
 UGROUP "ff_en_20" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.20.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.20.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_20" SIT "R102C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.20.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.20.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_20" SITE "R102C83D" ;
 #
 UGROUP "FC_21" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.21.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_21" SIT "R111C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.21.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_21" SITE "R111C58D" ;
 UGROUP "hitBuf_21" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.21.hit_mux_ch;
-LOCAT UGROUP "hitBuf_21" SIT "R112C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.21.hit_mux_ch;
+LOCATE UGROUP "hitBuf_21" SITE "R112C59D" ;
 UGROUP "ff_en_21" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.21.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.21.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_21" SIT "R111C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.21.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.21.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_21" SITE "R111C83D" ;
 #
 UGROUP "FC_22" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.22.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_22" SIT "R113C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.22.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_22" SITE "R113C58D" ;
 UGROUP "hitBuf_22" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.22.hit_mux_ch;
-LOCAT UGROUP "hitBuf_22" SIT "R114C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.22.hit_mux_ch;
+LOCATE UGROUP "hitBuf_22" SITE "R114C59D" ;
 UGROUP "ff_en_22" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.22.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.22.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_22" SIT "R113C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.22.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.22.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_22" SITE "R113C83D" ;
 #
 UGROUP "FC_23" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.23.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_23" SIT "R68C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.23.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_23" SITE "R68C2D" ;
 UGROUP "hitBuf_23" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.23.hit_mux_ch;
-LOCAT UGROUP "hitBuf_23" SIT "R69C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.23.hit_mux_ch;
+LOCATE UGROUP "hitBuf_23" SITE "R69C3D" ;
 UGROUP "ff_en_23" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.23.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.23.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_23" SIT "R68C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.23.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.23.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_23" SITE "R68C27D" ;
 #
 UGROUP "FC_24" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.24.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_24" SIT "R55C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.24.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_24" SITE "R55C2D" ;
 UGROUP "hitBuf_24" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.24.hit_mux_ch;
-LOCAT UGROUP "hitBuf_24" SIT "R56C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.24.hit_mux_ch;
+LOCATE UGROUP "hitBuf_24" SITE "R56C3D" ;
 UGROUP "ff_en_24" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.24.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.24.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_24" SIT "R55C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.24.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.24.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_24" SITE "R55C27D" ;
 #
 UGROUP "FC_25" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.25.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_25" SIT "R53C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.25.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_25" SITE "R53C2D" ;
 UGROUP "hitBuf_25" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.25.hit_mux_ch;
-LOCAT UGROUP "hitBuf_25" SIT "R54C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.25.hit_mux_ch;
+LOCATE UGROUP "hitBuf_25" SITE "R54C3D" ;
 UGROUP "ff_en_25" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.25.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.25.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_25" SIT "R53C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.25.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.25.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_25" SITE "R53C27D" ;
 #
 UGROUP "FC_26" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.26.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_26" SIT "R66C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.26.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_26" SITE "R66C2D" ;
 UGROUP "hitBuf_26" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.26.hit_mux_ch;
-LOCAT UGROUP "hitBuf_26" SIT "R67C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.26.hit_mux_ch;
+LOCATE UGROUP "hitBuf_26" SITE "R67C3D" ;
 UGROUP "ff_en_26" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.26.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.26.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_26" SIT "R66C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.26.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.26.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_26" SITE "R66C27D" ;
 #
 UGROUP "FC_27" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.27.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_27" SIT "R111C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.27.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_27" SITE "R111C2D" ;
 UGROUP "hitBuf_27" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.27.hit_mux_ch;
-LOCAT UGROUP "hitBuf_27" SIT "R112C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.27.hit_mux_ch;
+LOCATE UGROUP "hitBuf_27" SITE "R112C3D" ;
 UGROUP "ff_en_27" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.27.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.27.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_27" SIT "R111C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.27.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.27.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_27" SITE "R111C27D" ;
 #
 UGROUP "FC_28" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.28.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_28" SIT "R113C2D" ;
+       BLKNAME THE_TDC/GEN_Channels.28.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_28" SITE "R113C2D" ;
 UGROUP "hitBuf_28" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.28.hit_mux_ch;
-LOCAT UGROUP "hitBuf_28" SIT "R114C3D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.28.hit_mux_ch;
+LOCATE UGROUP "hitBuf_28" SITE "R114C3D" ;
 UGROUP "ff_en_28" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.28.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.28.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_28" SIT "R113C27D" ;
+#       BLKNAME THE_TDC/GEN_Channels.28.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.28.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_28" SITE "R113C27D" ;
 #
 UGROUP "FC_29" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.29.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_29" SIT "R8C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.29.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_29" SITE "R8C58D" ;
 UGROUP "hitBuf_29" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.29.hit_mux_ch;
-LOCAT UGROUP "hitBuf_29" SIT "R9C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.29.hit_mux_ch;
+LOCATE UGROUP "hitBuf_29" SITE "R9C59D" ;
 UGROUP "ff_en_29" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.29.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.29.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_29" SIT "R8C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.29.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.29.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_29" SITE "R8C83D" ;
 #
 UGROUP "FC_30" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.30.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_30" SIT "R10C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.30.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_30" SITE "R10C58D" ;
 UGROUP "hitBuf_30" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.30.hit_mux_ch;
-LOCAT UGROUP "hitBuf_30" SIT "R11C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.30.hit_mux_ch;
+LOCATE UGROUP "hitBuf_30" SITE "R11C59D" ;
 UGROUP "ff_en_30" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.30.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.30.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_30" SIT "R10C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.30.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.30.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_30" SITE "R10C83D" ;
 #
 UGROUP "FC_31" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.31.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_31" SIT "R21C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.31.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_31" SITE "R21C58D" ;
 UGROUP "hitBuf_31" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.31.hit_mux_ch;
-LOCAT UGROUP "hitBuf_31" SIT "R22C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.31.hit_mux_ch;
+LOCATE UGROUP "hitBuf_31" SITE "R22C59D" ;
 UGROUP "ff_en_31" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.31.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.31.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_31" SIT "R21C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.31.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.31.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_31" SITE "R21C83D" ;
 #
 UGROUP "FC_32" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.32.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_32" SIT "R23C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.32.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_32" SITE "R23C58D" ;
 UGROUP "hitBuf_32" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.32.hit_mux_ch;
-LOCAT UGROUP "hitBuf_32" SIT "R24C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.32.hit_mux_ch;
+LOCATE UGROUP "hitBuf_32" SITE "R24C59D" ;
 UGROUP "ff_en_32" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.32.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.32.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_32" SIT "R23C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.32.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.32.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_32" SITE "R23C83D" ;
 #
 UGROUP "FC_33" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.33.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_33" SIT "R30C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.33.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_33" SITE "R30C58D" ;
 UGROUP "hitBuf_33" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.33.hit_mux_ch;
-LOCAT UGROUP "hitBuf_33" SIT "R31C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.33.hit_mux_ch;
+LOCATE UGROUP "hitBuf_33" SITE "R31C59D" ;
 UGROUP "ff_en_33" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.33.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.33.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_33" SIT "R30C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.33.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.33.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_33" SITE "R30C83D" ;
 #
 UGROUP "FC_34" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.34.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_34" SIT "R32C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.34.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_34" SITE "R32C58D" ;
 UGROUP "hitBuf_34" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.34.hit_mux_ch;
-LOCAT UGROUP "hitBuf_34" SIT "R33C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.34.hit_mux_ch;
+LOCATE UGROUP "hitBuf_34" SITE "R33C59D" ;
 UGROUP "ff_en_34" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.34.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.34.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_34" SIT "R32C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.34.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.34.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_34" SITE "R32C83D" ;
 #
 UGROUP "FC_35" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.35.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_35" SIT "R35C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.35.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_35" SITE "R35C58D" ;
 UGROUP "hitBuf_35" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.35.hit_mux_ch;
-LOCAT UGROUP "hitBuf_35" SIT "R35C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.35.hit_mux_ch;
+LOCATE UGROUP "hitBuf_35" SITE "R35C59D" ;
 UGROUP "ff_en_35" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.35.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.35.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_35" SIT "R35C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.35.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.35.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_35" SITE "R35C83D" ;
 #
 UGROUP "FC_36" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.36.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_36" SIT "R37C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.36.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_36" SITE "R37C58D" ;
 UGROUP "hitBuf_36" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.36.hit_mux_ch;
-LOCAT UGROUP "hitBuf_36" SIT "R38C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.36.hit_mux_ch;
+LOCATE UGROUP "hitBuf_36" SITE "R38C59D" ;
 UGROUP "ff_en_36" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.36.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.36.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_36" SIT "R37C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.36.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.36.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_36" SITE "R37C83D" ;
 #
 UGROUP "FC_37" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.37.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_37" SIT "R48C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.37.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_37" SITE "R48C58D" ;
 UGROUP "hitBuf_37" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.37.hit_mux_ch;
-LOCAT UGROUP "hitBuf_37" SIT "R49C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.37.hit_mux_ch;
+LOCATE UGROUP "hitBuf_37" SITE "R49C59D" ;
 UGROUP "ff_en_37" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.37.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.37.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_37" SIT "R48C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.37.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.37.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_37" SITE "R48C83D" ;
 #
 UGROUP "FC_38" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.38.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_38" SIT "R50C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.38.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_38" SITE "R50C58D" ;
 UGROUP "hitBuf_38" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.38.hit_mux_ch;
-LOCAT UGROUP "hitBuf_38" SIT "R51C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.38.hit_mux_ch;
+LOCATE UGROUP "hitBuf_38" SITE "R51C59D" ;
 UGROUP "ff_en_38" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.38.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.38.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_38" SIT "R50C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.38.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.38.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_38" SITE "R50C83D" ;
 #
 UGROUP "FC_39" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.39.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_39" SIT "R89C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.39.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_39" SITE "R89C131D" ;
 UGROUP "hitBuf_39" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.39.hit_mux_ch;
-LOCAT UGROUP "hitBuf_39" SIT "R90C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.39.hit_mux_ch;
+LOCATE UGROUP "hitBuf_39" SITE "R90C132D" ;
 UGROUP "ff_en_39" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.39.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.39.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_39" SIT "R89C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.39.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.39.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_39" SITE "R89C156D" ;
 #
 UGROUP "FC_40" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.40.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_40" SIT "R91C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.40.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_40" SITE "R91C131D" ;
 UGROUP "hitBuf_40" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.40.hit_mux_ch;
-LOCAT UGROUP "hitBuf_40" SIT "R92C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.40.hit_mux_ch;
+LOCATE UGROUP "hitBuf_40" SITE "R92C132D" ;
 UGROUP "ff_en_40" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.40.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.40.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_40" SIT "R91C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.40.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.40.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_40" SITE "R91C156D" ;
 #
 UGROUP "FC_41" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.41.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_41" SIT "R102C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.41.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_41" SITE "R102C131D" ;
 UGROUP "hitBuf_41" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.41.hit_mux_ch;
-LOCAT UGROUP "hitBuf_41" SIT "R103C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.41.hit_mux_ch;
+LOCATE UGROUP "hitBuf_41" SITE "R103C132D" ;
 UGROUP "ff_en_41" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.41.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.41.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_41" SIT "R102C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.41.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.41.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_41" SITE "R102C156D" ;
 #
 UGROUP "FC_42" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.42.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_42" SIT "R104C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.42.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_42" SITE "R104C131D" ;
 UGROUP "hitBuf_42" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.42.hit_mux_ch;
-LOCAT UGROUP "hitBuf_42" SIT "R105C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.42.hit_mux_ch;
+LOCATE UGROUP "hitBuf_42" SITE "R105C132D" ;
 UGROUP "ff_en_42" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.42.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.42.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_42" SIT "R104C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.42.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.42.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_42" SITE "R104C156D" ;
 #
 UGROUP "FC_43" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.43.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_43" SIT "R86C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.43.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_43" SITE "R86C131D" ;
 UGROUP "hitBuf_43"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.43.hit_mux_ch;
-LOCAT UGROUP "hitBuf_43" SIT "R87C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.43.hit_mux_ch;
+LOCATE UGROUP "hitBuf_43" SITE "R87C132D" ;
 UGROUP "ff_en_43" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.43.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.43.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_43" SIT "R86C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.43.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.43.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_43" SITE "R86C156D" ;
 #
 UGROUP "FC_44" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.44.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_44" SIT "R84C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.44.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_44" SITE "R84C131D" ;
 UGROUP "hitBuf_44"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.44.hit_mux_ch;
-LOCAT UGROUP "hitBuf_44" SIT "R85C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.44.hit_mux_ch;
+LOCATE UGROUP "hitBuf_44" SITE "R85C132D" ;
 UGROUP "ff_en_44" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.44.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.44.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_44" SIT "R84C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.44.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.44.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_44" SITE "R84C156D" ;
 #
 UGROUP "FC_45" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.45.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_45" SIT "R73C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.45.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_45" SITE "R73C131D" ;
 UGROUP "hitBuf_45"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.45.hit_mux_ch;
-LOCAT UGROUP "hitBuf_45" SIT "R74C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.45.hit_mux_ch;
+LOCATE UGROUP "hitBuf_45" SITE "R74C132D" ;
 UGROUP "ff_en_45" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.45.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.45.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_45" SIT "R73C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.45.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.45.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_45" SITE "R73C156D" ;
 #
 UGROUP "FC_46" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.46.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_46" SIT "R71C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.46.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_46" SITE "R71C131D" ;
 UGROUP "hitBuf_46"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.46.hit_mux_ch;
-LOCAT UGROUP "hitBuf_46" SIT "R72C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.46.hit_mux_ch;
+LOCATE UGROUP "hitBuf_46" SITE "R72C132D" ;
 UGROUP "ff_en_46" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.46.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.46.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_46" SIT "R71C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.46.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.46.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_46" SITE "R71C156D" ;
 #
 UGROUP "FC_47" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.47.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_47" SIT "R111C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.47.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_47" SITE "R111C131D" ;
 UGROUP "hitBuf_47" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.47.hit_mux_ch;
-LOCAT UGROUP "hitBuf_47" SIT "R112C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.47.hit_mux_ch;
+LOCATE UGROUP "hitBuf_47" SITE "R112C132D" ;
 UGROUP "ff_en_47" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.47.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.47.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_47" SIT "R111C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.47.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.47.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_47" SITE "R111C156D" ;
 #
 UGROUP "FC_48" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.48.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_48" SIT "R113C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.48.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_48" SITE "R113C131D" ;
 UGROUP "hitBuf_48" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.48.hit_mux_ch;
-LOCAT UGROUP "hitBuf_48" SIT "R114C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.48.hit_mux_ch;
+LOCATE UGROUP "hitBuf_48" SITE "R114C132D" ;
 UGROUP "ff_en_48" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.48.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.48.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_48" SIT "R113C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.48.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.48.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_48" SITE "R113C156D" ;
 #
 UGROUP "FC_49" BBOX 1 48
-       BLKNAM TH_TDC/GN_Channels.49.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_49" SIT "R8C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.49.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_49" SITE "R8C131D" ;
 UGROUP "hitBuf_49" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.49.hit_mux_ch;
-LOCAT UGROUP "hitBuf_49" SIT "R9C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.49.hit_mux_ch;
+LOCATE UGROUP "hitBuf_49" SITE "R9C132D" ;
 UGROUP "ff_en_49"  BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.49.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.49.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_49" SIT "R8C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.49.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.49.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_49" SITE "R8C156D" ;
 #
 UGROUP "FC_50" BBOX 1 48
-       BLKNAM TH_TDC/GN_Channels.50.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_50" SIT "R10C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.50.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_50" SITE "R10C131D" ;
 UGROUP "hitBuf_50" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.50.hit_mux_ch;
-LOCAT UGROUP "hitBuf_50" SIT "R11C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.50.hit_mux_ch;
+LOCATE UGROUP "hitBuf_50" SITE "R11C132D" ;
 UGROUP "ff_en_50"  BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.50.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.50.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_50" SIT "R10C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.50.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.50.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_50" SITE "R10C156D" ;
 #
 UGROUP "FC_51" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.51.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_51" SIT "R21C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.51.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_51" SITE "R21C131D" ;
 UGROUP "hitBuf_51"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.51.hit_mux_ch;
-LOCAT UGROUP "hitBuf_51" SIT "R22C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.51.hit_mux_ch;
+LOCATE UGROUP "hitBuf_51" SITE "R22C132D" ;
 UGROUP "ff_en_51" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.51.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.51.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_51" SIT "R21C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.51.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.51.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_51" SITE "R21C156D" ;
 #
 UGROUP "FC_52" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.52.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_52" SIT "R23C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.52.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_52" SITE "R23C131D" ;
 UGROUP "hitBuf_52"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.52.hit_mux_ch;
-LOCAT UGROUP "hitBuf_52" SIT "R24C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.52.hit_mux_ch;
+LOCATE UGROUP "hitBuf_52" SITE "R24C132D" ;
 UGROUP "ff_en_52" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.52.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.52.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_52" SIT "R23C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.52.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.52.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_52" SITE "R23C156D" ;
 #
 UGROUP "FC_53" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.53.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_53" SIT "R30C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.53.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_53" SITE "R30C131D" ;
 UGROUP "hitBuf_53"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.53.hit_mux_ch;
-LOCAT UGROUP "hitBuf_53" SIT "R31C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.53.hit_mux_ch;
+LOCATE UGROUP "hitBuf_53" SITE "R31C132D" ;
 UGROUP "ff_en_53" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.53.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.53.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_53" SIT "R30C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.53.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.53.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_53" SITE "R30C156D" ;
 #
 UGROUP "FC_54" BBOX 1 48 
-      BLKNAM TH_TDC/GN_Channels.54.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_54" SIT "R32C131D" ;
+      BLKNAME THE_TDC/GEN_Channels.54.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_54" SITE "R32C131D" ;
 UGROUP "hitBuf_54"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.54.hit_mux_ch;
-LOCAT UGROUP "hitBuf_54" SIT "R33C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.54.hit_mux_ch;
+LOCATE UGROUP "hitBuf_54" SITE "R33C132D" ;
 UGROUP "ff_en_54" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.54.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.54.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_54" SIT "R32C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.54.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.54.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_54" SITE "R32C156D" ;
 #
 UGROUP "FC_55" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.55.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_55" SIT "R35C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.55.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_55" SITE "R35C131D" ;
 UGROUP "hitBuf_55"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.55.hit_mux_ch;
-LOCAT UGROUP "hitBuf_55" SIT "R36C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.55.hit_mux_ch;
+LOCATE UGROUP "hitBuf_55" SITE "R36C132D" ;
 UGROUP "ff_en_55" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.55.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.55.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_55" SIT "R35C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.55.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.55.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_55" SITE "R35C156D" ;
 #
 UGROUP "FC_56" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.56.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_56" SIT "R37C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.56.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_56" SITE "R37C131D" ;
 UGROUP "hitBuf_56"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.56.hit_mux_ch;
-LOCAT UGROUP "hitBuf_56" SIT "R38C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.56.hit_mux_ch;
+LOCATE UGROUP "hitBuf_56" SITE "R38C132D" ;
 UGROUP "ff_en_56" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.56.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.56.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_56" SIT "R37C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.56.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.56.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_56" SITE "R37C156D" ;
 #
 UGROUP "FC_57" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.57.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_57" SIT "R48C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.57.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_57" SITE "R48C131D" ;
 UGROUP "hitBuf_57"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.57.hit_mux_ch;
-LOCAT UGROUP "hitBuf_57" SIT "R49C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.57.hit_mux_ch;
+LOCATE UGROUP "hitBuf_57" SITE "R49C132D" ;
 UGROUP "ff_en_57" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.57.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.57.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_57" SIT "R48C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.57.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.57.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_57" SITE "R48C156D" ;
 #
 UGROUP "FC_58" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.58.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_58" SIT "R50C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.58.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_58" SITE "R50C131D" ;
 UGROUP "hitBuf_58"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.58.hit_mux_ch;
-LOCAT UGROUP "hitBuf_58" SIT "R51C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.58.hit_mux_ch;
+LOCATE UGROUP "hitBuf_58" SITE "R51C132D" ;
 UGROUP "ff_en_58" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.58.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.58.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_58" SIT "R50C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.58.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.58.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_58" SITE "R50C156D" ;
 #
 UGROUP "FC_59" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.59.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_59" SIT "R53C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.59.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_59" SITE "R53C131D" ;
 UGROUP "hitBuf_59"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.59.hit_mux_ch;
-LOCAT UGROUP "hitBuf_59" SIT "R54C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.59.hit_mux_ch;
+LOCATE UGROUP "hitBuf_59" SITE "R54C132D" ;
 UGROUP "ff_en_59" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.59.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.59.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_59" SIT "R53C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.59.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.59.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_59" SITE "R53C156D" ;
 #
 UGROUP "FC_60" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.60.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_60" SIT "R55C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.60.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_60" SITE "R55C131D" ;
 UGROUP "hitBuf_60" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.60.hit_mux_ch;
-LOCAT UGROUP "hitBuf_60" SIT "R56C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.60.hit_mux_ch;
+LOCATE UGROUP "hitBuf_60" SITE "R56C132D" ;
 UGROUP "ff_en_60" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.60.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.60.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_60" SIT "R55C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.60.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.60.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_60" SITE "R55C156D" ;
 #
 UGROUP "FC_61" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.61.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_61" SIT "R66C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.61.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_61" SITE "R66C131D" ;
 UGROUP "hitBuf_61"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.61.hit_mux_ch;
-LOCAT UGROUP "hitBuf_61" SIT "R67C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.61.hit_mux_ch;
+LOCATE UGROUP "hitBuf_61" SITE "R67C132D" ;
 UGROUP "ff_en_61" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.61.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.61.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_61" SIT "R66C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.61.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.61.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_61" SITE "R66C156D" ;
 #
 UGROUP "FC_62" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.62.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_62" SIT "R68C131D" ;
+       BLKNAME THE_TDC/GEN_Channels.62.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_62" SITE "R68C131D" ;
 UGROUP "hitBuf_62"  BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.62.hit_mux_ch;
-LOCAT UGROUP "hitBuf_62" SIT "R69C132D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.62.hit_mux_ch;
+LOCATE UGROUP "hitBuf_62" SITE "R69C132D" ;
 UGROUP "ff_en_62" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.62.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.62.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_62" SIT "R68C156D" ;
+#       BLKNAME THE_TDC/GEN_Channels.62.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.62.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_62" SITE "R68C156D" ;
 #
 UGROUP "FC_63" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.63.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_63" SIT "R86C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.63.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_63" SITE "R86C58D" ;
 UGROUP "hitBuf_63" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.63.hit_mux_ch;
-LOCAT UGROUP "hitBuf_63" SIT "R87C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.63.hit_mux_ch;
+LOCATE UGROUP "hitBuf_63" SITE "R87C59D" ;
 UGROUP "ff_en_63" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.63.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.63.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_63" SIT "R86C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.63.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.63.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_63" SITE "R86C83D" ;
 #
 UGROUP "FC_64" BBOX 1 48 
-       BLKNAM TH_TDC/GN_Channels.64.Channels/Channel200/SimAdderNo.FC;
-LOCAT UGROUP "FC_64" SIT "R84C58D" ;
+       BLKNAME THE_TDC/GEN_Channels.64.Channels/Channel200/SimAdderNo.FC;
+LOCATE UGROUP "FC_64" SITE "R84C58D" ;
 UGROUP "hitBuf_64" BBOX 1 1
-       BLKNAM TH_TDC/GN_hit_mux.64.hit_mux_ch;
-LOCAT UGROUP "hitBuf_64" SIT "R85C59D" ;
+       BLKNAME THE_TDC/GEN_hit_mux.64.hit_mux_ch;
+LOCATE UGROUP "hitBuf_64" SITE "R85C59D" ;
 UGROUP "ff_en_64" BBOX 1 1
-#       BLKNAM TH_TDC/GN_Channels.64.Channels/Channel200/NCODR_START_OUT
-       BLKNAM TH_TDC/GN_Channels.64.Channels/Channel200/ff_array_en_1_i;
-LOCAT UGROUP "ff_en_64" SIT "R84C83D" ;
+#       BLKNAME THE_TDC/GEN_Channels.64.Channels/Channel200/ENCODER_START_OUT
+       BLKNAME THE_TDC/GEN_Channels.64.Channels/Channel200/ff_array_en_1_i;
+LOCATE UGROUP "ff_en_64" SITE "R84C83D" ;
 #
 
 
 ##############################################################################
-##			     CHANNL PLACMNTS                             ##
+##			     CHANNEL PLACEMENTS                             ##
 ##############################################################################
-UGROUP "F_LT2" BBOX 10 49
-       BLKNAM TH_TDC/ReferenceChannel/Channel200
-       BLKNAM TH_TDC/ReferenceChannel/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.1.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.1.Channels/Buffer_128.The_Buffer
+UGROUP "EF_LT2" BBOX 10 49
+       BLKNAME THE_TDC/ReferenceChannel/Channel200
+       BLKNAME THE_TDC/ReferenceChannel/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.1.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.1.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LT2" SIT "R24C2D" ;
-UGROUP "F_LC1" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.2.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.2.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.3.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.3.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.4.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.4.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.5.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.5.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LT2" SITE "R24C2D" ;
+UGROUP "EF_LC1" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.2.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.2.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.3.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.3.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.4.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.4.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.5.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.5.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LC1" SIT "R35C2D" ;
-UGROUP "F_LC3" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.6.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.6.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.7.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.7.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.8.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.8.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.9.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.9.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LC1" SITE "R35C2D" ;
+UGROUP "EF_LC3" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.6.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.6.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.7.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.7.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.8.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.8.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.9.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.9.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LC3" SIT "R71C2D" ;
-UGROUP "F_LB1" BBOX 16 49
-       BLKNAM TH_TDC/GN_Channels.10.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.10.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.11.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.11.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.12.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.12.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LC3" SITE "R71C2D" ;
+UGROUP "EF_LB1" BBOX 16 49
+       BLKNAME THE_TDC/GEN_Channels.10.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.10.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.11.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.11.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.12.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.12.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LB1" SIT "R89C2D" ;
-UGROUP "F_LT1" BBOX 16 49
-       BLKNAM TH_TDC/GN_Channels.13.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.13.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.14.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.14.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.15.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.15.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.16.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.16.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LB1" SITE "R89C2D" ;
+UGROUP "EF_LT1" BBOX 16 49
+       BLKNAME THE_TDC/GEN_Channels.13.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.13.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.14.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.14.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.15.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.15.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.16.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.16.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LT1" SIT "R8C2D" ;
-UGROUP "F_CB1" BBOX 16 49
-       BLKNAM TH_TDC/GN_Channels.17.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.17.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.18.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.18.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.19.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.19.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.20.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.20.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LT1" SITE "R8C2D" ;
+UGROUP "EF_CB1" BBOX 16 49
+       BLKNAME THE_TDC/GEN_Channels.17.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.17.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.18.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.18.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.19.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.19.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.20.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.20.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_CB1" SIT "R89C58D" ;
-UGROUP "F_CB2" BBOX 10 49
-       BLKNAM TH_TDC/GN_Channels.21.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.21.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.22.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.22.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_CB1" SITE "R89C58D" ;
+UGROUP "EF_CB2" BBOX 10 49
+       BLKNAME THE_TDC/GEN_Channels.21.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.21.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.22.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.22.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_CB2" SIT "R105C58D" ;
-UGROUP "F_LC2" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.23.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.23.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.24.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.24.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.25.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.25.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.26.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.26.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_CB2" SITE "R105C58D" ;
+UGROUP "EF_LC2" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.23.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.23.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.24.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.24.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.25.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.25.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.26.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.26.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LC2" SIT "R53C2D" ;
-UGROUP "F_LB2" BBOX 10 49
-       BLKNAM TH_TDC/GN_Channels.27.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.27.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.28.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.28.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LC2" SITE "R53C2D" ;
+UGROUP "EF_LB2" BBOX 10 49
+       BLKNAME THE_TDC/GEN_Channels.27.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.27.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.28.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.28.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_LB2" SIT "R105C2D" ;
-UGROUP "F_CT1" BBOX 16 49
-       BLKNAM TH_TDC/GN_Channels.29.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.29.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.30.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.30.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.31.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.31.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.32.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.32.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_LB2" SITE "R105C2D" ;
+UGROUP "EF_CT1" BBOX 16 49
+       BLKNAME THE_TDC/GEN_Channels.29.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.29.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.30.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.30.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.31.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.31.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.32.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.32.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_CT1" SIT "R8C58D" ;
-UGROUP "F_CT2" BBOX 10 49
-       BLKNAM TH_TDC/GN_Channels.33.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.33.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.34.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.34.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_CT1" SITE "R8C58D" ;
+UGROUP "EF_CT2" BBOX 10 49
+       BLKNAME THE_TDC/GEN_Channels.33.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.33.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.34.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.34.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_CT2" SIT "R24C58D" ;
-UGROUP "F_CC1" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.35.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.35.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.36.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.36.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.37.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.37.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.38.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.38.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_CT2" SITE "R24C58D" ;
+UGROUP "EF_CC1" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.35.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.35.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.36.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.36.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.37.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.37.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.38.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.38.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_CC1" SIT "R35C58D" ;
-UGROUP "F_RB1" BBOX 16 49
-       BLKNAM TH_TDC/GN_Channels.39.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.39.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.40.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.40.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.41.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.41.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.42.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.42.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_CC1" SITE "R35C58D" ;
+UGROUP "EF_RB1" BBOX 16 49
+       BLKNAME THE_TDC/GEN_Channels.39.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.39.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.40.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.40.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.41.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.41.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.42.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.42.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RB1" SIT "R89C131D" ;
-UGROUP "F_RC3" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.43.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.43.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.44.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.44.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.45.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.45.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.46.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.46.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RB1" SITE "R89C131D" ;
+UGROUP "EF_RC3" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.43.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.43.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.44.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.44.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.45.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.45.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.46.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.46.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RC3" SIT "R71C131D" ;
-UGROUP "F_RB2" BBOX 10 49
-       BLKNAM TH_TDC/GN_Channels.47.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.47.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.48.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.48.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RC3" SITE "R71C131D" ;
+UGROUP "EF_RB2" BBOX 10 49
+       BLKNAME THE_TDC/GEN_Channels.47.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.47.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.48.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.48.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RB2" SIT "R105C131D" ;
-UGROUP "F_RT1" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.49.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.49.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.50.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.50.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.51.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.51.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.52.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.52.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RB2" SITE "R105C131D" ;
+UGROUP "EF_RT1" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.49.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.49.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.50.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.50.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.51.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.51.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.52.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.52.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RT1" SIT "R8C131D" ;
-UGROUP "F_RT2" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.53.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.53.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.54.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.54.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RT1" SITE "R8C131D" ;
+UGROUP "EF_RT2" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.53.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.53.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.54.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.54.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RT2" SIT "R24C131D" ;
-UGROUP "F_RC1" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.55.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.55.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.56.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.56.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.57.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.57.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.58.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.58.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RT2" SITE "R24C131D" ;
+UGROUP "EF_RC1" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.55.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.55.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.56.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.56.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.57.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.57.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.58.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.58.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RC1" SIT "R35C131D" ;
-UGROUP "F_RC2" BBOX 17 49
-       BLKNAM TH_TDC/GN_Channels.59.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.59.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.60.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.60.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.61.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.61.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.62.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.62.Channels/Buffer_128.The_Buffer
+LOCATE UGROUP "EF_RC1" SITE "R35C131D" ;
+UGROUP "EF_RC2" BBOX 17 49
+       BLKNAME THE_TDC/GEN_Channels.59.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.59.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.60.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.60.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.61.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.61.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.62.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.62.Channels/Buffer_128.The_Buffer
        ;
-LOCAT UGROUP "F_RC2" SIT "R53C131D" ;
-UGROUP "F_CC3" BBOX 10 49
-       BLKNAM TH_TDC/GN_Channels.63.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.64.Channels/Channel200
-       BLKNAM TH_TDC/GN_Channels.63.Channels/Buffer_128.The_Buffer
-       BLKNAM TH_TDC/GN_Channels.64.Channels/Buffer_128.The_Buffer;
-LOCAT UGROUP "F_CC3" SIT "R78C58D" ;
+LOCATE UGROUP "EF_RC2" SITE "R53C131D" ;
+UGROUP "EF_CC3" BBOX 10 49
+       BLKNAME THE_TDC/GEN_Channels.63.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.64.Channels/Channel200
+       BLKNAME THE_TDC/GEN_Channels.63.Channels/Buffer_128.The_Buffer
+       BLKNAME THE_TDC/GEN_Channels.64.Channels/Buffer_128.The_Buffer;
+LOCATE UGROUP "EF_CC3" SITE "R78C58D" ;
 
 #############################################################################
 ## Stretcher
 #############################################################################
 UGROUP "Stretcher_A" BBOX 6 8
-        BLKNAM TH_TDC/gen_double_withStretcher.The_Stretcher/Stretcher_A_1
+        BLKNAME THE_TDC/gen_double_withStretcher.The_Stretcher/Stretcher_A_1
 ;
-LOCAT UGROUP "Stretcher_A" SIT "R2C174D";
+LOCATE UGROUP "Stretcher_A" SITE "R2C174D";
 
 UGROUP "Stretcher_B" BBOX 6 8
-        BLKNAM TH_TDC/gen_double_withStretcher.The_Stretcher/Stretcher_B_1
+        BLKNAME THE_TDC/gen_double_withStretcher.The_Stretcher/Stretcher_B_1
 ;
-LOCAT UGROUP "Stretcher_B" SIT "R2C2D";
+LOCATE UGROUP "Stretcher_B" SITE "R2C2D";
 
 #############################################################################
 ## Coarse counter register placement
@@ -1284,117 +1284,116 @@ LOCAT UGROUP "Stretcher_B" SIT "R2C2D";
 #############################################################################
 ##                         Unimportant Data Lines                          ##
 #############################################################################
-MULTICYCL FROM CLL "TH_TDC/reset_counters*" 4x;
+MULTICYCLE FROM CELL "THE_TDC/reset_counters*" 4x;
 
-MULTICYCL FROM CLL "TH_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/FF*" TO CLL "TH_TDC/ReferenceChannel/Channel200/ringBuffer_almost_full_sync*" 2x;
-MULTICYCL FROM CLL "TH_TDC/GN_Channels*Channels/Channel200/RingBuffer*FIFO/FF*" TO CLL "TH_TDC/GN_Channels*Channels/Channel200/ringBuffer_almost_full_sync*" 2x;
+MULTICYCLE FROM CELL "THE_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/FF*" TO CELL "THE_TDC/ReferenceChannel/Channel200/ringBuffer_almost_full_sync*" 2x;
+MULTICYCLE FROM CELL "THE_TDC/GEN_Channels*Channels/Channel200/RingBuffer*FIFO/FF*" TO CELL "THE_TDC/GEN_Channels*Channels/Channel200/ringBuffer_almost_full_sync*" 2x;
 
-MULTICYCL FROM CLL "TH_TDC/ThepochCounter/counter*" TO CLL "TH_TDC/ReferenceChannel/Channel200/epoch_cntr[*]" 4 X;
-MULTICYCL FROM CLL "TH_TDC/ThepochCounter/counter*" TO CLL "TH_TDC/GN_Channels*Channels/Channel200/epoch_cntr[*]" 4 X;
+MULTICYCLE FROM CELL "THE_TDC/TheEpochCounter/counter*" TO CELL "THE_TDC/ReferenceChannel/Channel200/epoch_cntr[*]" 4 X;
+MULTICYCLE FROM CELL "THE_TDC/TheEpochCounter/counter*" TO CELL "THE_TDC/GEN_Channels*Channels/Channel200/epoch_cntr[*]" 4 X;
 
-MULTICYCL TO CLL "TH_TDC/TheReadout/TW_pre*" 4 x;
-MULTICYCL TO CLL "TH_TDC/TheReadout/TW_post*" 4 x;
+MULTICYCLE TO CELL "THE_TDC/TheReadout/TW_pre*" 4 x;
+MULTICYCLE TO CELL "THE_TDC/TheReadout/TW_post*" 4 x;
 
-MULTICYCL FROM CLL "TH_TDC/hit_edge[*]" TO CLL "TH_TDC/GN_Channels.*.Channels/Channel200/memory_ram" 2.000000 X ;
+MULTICYCLE FROM CELL "THE_TDC/hit_edge[*]" TO CELL "THE_TDC/GEN_Channels.*.Channels/Channel200/memory_ram" 2.000000 X ;
 
-#MULTICYCL TO CLL "TH_TDC/TheChannelDebugBus/data_out_reg[*]" 4 x;
+#MULTICYCLE TO CELL "THE_TDC/TheChannelDebugBus/data_out_reg[*]" 4 x;
 
-#MULTICYCL FROM CLKNT "clk_100_i" TO CLKNT "CLK_OSC_c" 4.000000 X ;
+#MULTICYCLE FROM CLKNET "clk_100_i" TO CLKNET "CLK_OSC_c" 4.000000 X ;
 
-MULTICYCL TO CLL "TH_TDC/edge_rising_100_r[*]" 4 x;
-MULTICYCL FROM CLL "TH_TDC/GN_Channels.*.Channels/Channel200/ringBuffer_almost_full_flag*" TO CLL "TH_TDC/TheReadout/data_out_r[*]" 2 x;
+MULTICYCLE TO CELL "THE_TDC/edge_rising_100_r[*]" 4 x;
+MULTICYCLE FROM CELL "THE_TDC/GEN_Channels.*.Channels/Channel200/ringBuffer_almost_full_flag*" TO CELL "THE_TDC/TheReadout/data_out_r[*]" 2 x;
 
-MULTICYCL TO CLL "TH_TDC/ReferenceChannel/Channel200/SimAdderNo.FC/FF*" 4x;
-MULTICYCL TO CLL "TH_TDC/GN_Channels.*.Channels/Channel200/SimAdderNo.FC/FF*" 4x;
-
-
-BLOCK NT "TH_TDC/hit_in_s*";
-
-MAXDLAY NT "TH_TDC/hit_in_i*" 0.600000 nS; #DATAPATH_ONLY ;
-
-US SCONDARY NT "TH_TDC/coarse_cntr_reset";
-US SCONDARY NT "TH_TDC/trg_win_end_tdc";
+MULTICYCLE TO CELL "THE_TDC/ReferenceChannel/Channel200/SimAdderNo.FC/FF*" 4x;
+MULTICYCLE TO CELL "THE_TDC/GEN_Channels.*.Channels/Channel200/SimAdderNo.FC/FF*" 4x;
 
 
+BLOCK NET "THE_TDC/hit_in_s*";
+
+MAXDELAY NET "THE_TDC/hit_in_i*" 0.600000 nS; #DATAPATH_ONLY ;
+
+USE SECONDARY NET "THE_TDC/coarse_cntr_reset";
+USE SECONDARY NET "THE_TDC/trg_win_end_tdc";
 
 
-# MULTICYCL FROM CLL "PROC_TDC_CTRL_RG*tdc_ctrl_reg*" 4x;
+
+
+# MULTICYCLE FROM CELL "PROC_TDC_CTRL_REG*tdc_ctrl_reg*" 4x;
 
 ## Maybe effective
 
-# MULTICYCL FROM CLL "TH_TDC/GN_Channels*Channels/The_Buffer/*" TO CLL "TH_TDC/TheReadout/rd_en*" 2 X;
+# MULTICYCLE FROM CELL "THE_TDC/GEN_Channels*Channels/The_Buffer/*" TO CELL "THE_TDC/TheReadout/rd_en*" 2 X;
 
 
 
-PROHIBIT SCONDARY NT "TH_TDC/ReferenceChannel/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.1.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.2.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.3.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.4.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.5.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.6.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.7.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.8.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.9.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.10.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.11.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.12.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.13.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.14.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.15.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.16.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.17.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.18.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.19.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.20.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.21.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.22.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.23.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.24.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.25.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.26.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.27.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.28.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.29.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.30.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.31.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.32.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.33.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.34.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.35.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.36.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.37.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.38.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.39.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.40.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.41.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.42.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.43.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.44.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.45.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.46.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.47.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.48.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.49.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.50.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.51.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.52.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.53.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.54.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.55.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.56.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.57.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.58.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.59.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.60.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.61.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.62.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.63.Channels/Channel200/ff_array_en";
-PROHIBIT SCONDARY NT "TH_TDC/GN_Channels.64.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/ReferenceChannel/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.1.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.2.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.3.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.4.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.5.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.6.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.7.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.8.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.9.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.10.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.11.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.12.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.13.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.14.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.15.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.16.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.17.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.18.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.19.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.20.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.21.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.22.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.23.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.24.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.25.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.26.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.27.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.28.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.29.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.30.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.31.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.32.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.33.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.34.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.35.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.36.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.37.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.38.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.39.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.40.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.41.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.42.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.43.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.44.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.45.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.46.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.47.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.48.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.49.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.50.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.51.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.52.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.53.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.54.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.55.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.56.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.57.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.58.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.59.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.60.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.61.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.62.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.63.Channels/Channel200/ff_array_en";
+PROHIBIT SECONDARY NET "THE_TDC/GEN_Channels.64.Channels/Channel200/ff_array_en";
 
 
-MULTICYCL FROM CLL "TH_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/*" CLKNT CLK_PCLK_LFT_c TO CLL "TH_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/*" CLKNT clk_100_internal 2x;
-MULTICYCL FROM CLL "TH_TDC/GN_Channels*Channels/Channel200/RingBuffer*FIFO/*" CLKNT CLK_PCLK_LFT_c TO CLL "TH_TDC/GN_Channels*Channels/Channel200/RingBuffer*FIFO/*" CLKNT clk_100_internal 2x;
+MULTICYCLE FROM CELL "THE_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/*" CLKNET CLK_PCLK_LEFT_c TO CELL "THE_TDC/ReferenceChannel/Channel200/RingBuffer*FIFO/*" CLKNET clk_100_internal 2x;
+MULTICYCLE FROM CELL "THE_TDC/GEN_Channels*Channels/Channel200/RingBuffer*FIFO/*" CLKNET CLK_PCLK_LEFT_c TO CELL "THE_TDC/GEN_Channels*Channels/Channel200/RingBuffer*FIFO/*" CLKNET clk_100_internal 2x;
 
-MULTICYCL FROM CLL "TH_RST_HANDLR/final_reset*" CLKNT clk_100_internal TO CLKNT clk_100_internal 5x;
-                     
+MULTICYCLE FROM CELL "THE_RESET_HANDLER/final_reset*" CLKNET clk_100_internal TO CLKNET clk_100_internal 5x;
