@@ -11,7 +11,7 @@ Starting process:
 
 
 
- Module PCS has been generated in /home/hadaq/greg/new_projects/repos/trb3_periph_tdc_soda/hdl/soda/lattice/ecp3/. successfully!
+ Module PCS has been generated in /home/hadaq/greg/new_projects/repos/trb3_periph_tdc_soda/hdl/soda/lattice/ecp3 successfully!
 
 /home/soft/lattice/diamond/3.6_x64/bin/lin64/hdl2jhd -tfi -mod sfp_2sync_200_int -ext readme -out sfp_2sync_200_int -tpl sfp_2sync_200_int.tft sfp_2sync_200_int.vhd
 
