@@ -442,7 +442,7 @@ begin
 			MED_DATAREADY_OUT  => med_dataready_in,
 			MED_READ_IN        => med_read_out,
 			REFCLK2CORE_OUT    => open,
-			CLK_RX_HALF_OUT    => rx_clock_100,
+			CLK_RX_HALF_OUT    => open,
 			CLK_RX_FULL_OUT    => SODA_clock_rx, --rx_clock_200,
 			--SFP Connection
 			SD_RXD_P_IN        => SERDES_RX(2),
